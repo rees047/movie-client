@@ -22685,20 +22685,32 @@ class MainView extends _reactDefault.default.Component {
                 {
                     _id: 1,
                     Title: "Inception",
-                    Description: "desc1",
-                    ImagePath: "http://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg"
+                    Description: "Dom Cobb (Leonardo DiCaprio) is a thief with the rare ability to enter people's dreams and steal their secrets from their subconscious. His skill has made him a hot commodity in the world of corporate espionage but has also cost him everything he loves. Cobb gets a chance at redemption when he is offered a seemingly impossible task: Plant an idea in someone's mind. If he succeeds, it will be the perfect crime, but a dangerous enemy anticipates Cobb's every move.",
+                    Director: "Christopher Nolan",
+                    Genre: "Sci-Fi",
+                    Rating: "PG-13",
+                    Release: "July 13, 2010",
+                    ImagePath: "https://images.pexels.com/photos/804416/pexels-photo-804416.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                 },
                 {
                     _id: 2,
                     Title: "The Shawshank Redemption",
-                    Description: "desc2",
-                    ImagePath: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"
+                    Description: "Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didn't commit the crimes. While there, he forms a friendship with Red (Morgan Freeman), experiences brutality of prison life, adapts, helps the warden, etc., all in 19 years.",
+                    Director: "Frank Darabont",
+                    Genre: "Crime",
+                    Rating: "R",
+                    Release: "September 22, 1994",
+                    ImagePath: "https://images.pexels.com/photos/8104373/pexels-photo-8104373.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
                 },
                 {
                     _id: 3,
                     Title: "Gladiator",
-                    Description: "desc2",
-                    ImagePath: "https://images.unsplash.com/photo-1462747772350-460bb4aad7f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
+                    Description: "Gladiator is a 2000 epic historical drama film directed by Ridley Scott and written by David Franzoni, John Logan, and William Nicholson. ... Crowe portrays Roman general Maximus Decimus Meridius, who is betrayed when Commodus, the ambitious son of Emperor Marcus Aurelius, murders his father and seizes the throne.",
+                    Director: "Ridley Scott",
+                    Genre: "Action",
+                    Rating: "R",
+                    Release: "May 5, 2000",
+                    ImagePath: "https://images.pexels.com/photos/4172678/pexels-photo-4172678.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
                 }
             ],
             selectedMovie: null
@@ -22718,7 +22730,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 43
+                lineNumber: 55
             },
             __self: this
         }));
@@ -22726,7 +22738,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 46
+                lineNumber: 58
             },
             __self: this,
             children: "The list is empty!"
@@ -22735,7 +22747,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 50
+                lineNumber: 62
             },
             __self: this,
             children: movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -22745,7 +22757,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 52
+                        lineNumber: 64
                     },
                     __self: this
                 }, movie._id)
@@ -22777,16 +22789,24 @@ class MovieCard extends _reactDefault.default.Component {
     render() {
         const { movieData , onMovieClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-            className: "movie-card",
+            className: "movie-card movie-details-container",
             onClick: ()=>{
                 onMovieClick(movieData);
             },
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 6
+                lineNumber: 7
             },
             __self: this,
-            children: movieData.Title
+            children: /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                class: "label",
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 8
+                },
+                __self: this,
+                children: movieData.Title
+            })
         }));
     }
 }
@@ -22966,7 +22986,7 @@ class MovieView extends _reactDefault.default.Component {
     render() {
         const { movieData , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
-            className: "movie-view",
+            className: "movie-view movie-details-container",
             __source: {
                 fileName: "src/components/movie-view/movie-view.jsx",
                 lineNumber: 7
@@ -22982,6 +23002,8 @@ class MovieView extends _reactDefault.default.Component {
                     __self: this,
                     children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
                         src: movieData.ImagePath,
+                        width: "200",
+                        height: "300",
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
                             lineNumber: 9
@@ -22990,7 +23012,7 @@ class MovieView extends _reactDefault.default.Component {
                     })
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-title",
+                    className: "movie-title movie-details-container",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 11
@@ -23004,7 +23026,7 @@ class MovieView extends _reactDefault.default.Component {
                                 lineNumber: 12
                             },
                             __self: this,
-                            children: "Title:"
+                            children: "Title: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                             className: "value",
@@ -23021,7 +23043,7 @@ class MovieView extends _reactDefault.default.Component {
                     ]
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-description",
+                    className: "movie-director movie-details-container",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 15
@@ -23035,13 +23057,125 @@ class MovieView extends _reactDefault.default.Component {
                                 lineNumber: 16
                             },
                             __self: this,
-                            children: "Title:"
+                            children: "Rating: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 17
+                            },
+                            __self: this,
+                            children: movieData.Rating
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "movie-director movie-details-container",
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 20
+                            },
+                            __self: this,
+                            children: "Genre: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 21
+                            },
+                            __self: this,
+                            children: movieData.Genre
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "movie-director movie-details-container",
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 23
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 24
+                            },
+                            __self: this,
+                            children: "Release Date: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 25
+                            },
+                            __self: this,
+                            children: movieData.Release
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "movie-director movie-details-container",
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 27
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 28
+                            },
+                            __self: this,
+                            children: "Director: "
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "value",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 29
+                            },
+                            __self: this,
+                            children: movieData.Director
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
+                    className: "movie-description movie-details-container",
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 31
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
+                            className: "label",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 32
+                            },
+                            __self: this,
+                            children: "Description: "
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs("span", {
                             className: "value",
                             __source: {
                                 fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 17
+                                lineNumber: 33
                             },
                             __self: this,
                             children: [
@@ -23051,13 +23185,21 @@ class MovieView extends _reactDefault.default.Component {
                         })
                     ]
                 }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 35
+                    },
+                    __self: this
+                }),
                 /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                    class: "cursor-pointer",
                     onClick: ()=>{
                         onBackClick(null);
                     },
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 19
+                        lineNumber: 36
                     },
                     __self: this,
                     children: "Back"

@@ -2,4 +2,18 @@ $color: steelblue;
 
 .CineFiles{
     color: $color;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: small;
+}
+
+.label{
+    font-weight: bold;
+}
+
+.movie-details-container{
+    padding: 0.25em;
+}
+
+.movie-card span.label, .cursor-pointer{
+    cursor: pointer;
 }
