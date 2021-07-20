@@ -31,24 +31,28 @@ export class MainView extends React.Component{
         }
     }
 
+    setSelectedMovie(newSelectedMovie){
+        this.setState({
+            selectedMovie : newSelectedMovie
+        });
+    }
+
     render(){
         const {movies, selectedMovie} = this.state;
 
-        if (selectedMovie) return <MovieView movieData={selectedMovie} />
+        if (selectedMovie) return <MovieView movieData={selectedMovie} />;
 
         if (movies.length === 0){
-            return <div className="main-view"> The list is empty!</div>
-        }else {
-            return (
-                <div className="main-view">
-                    <button onClick={() => {
-                        alert('Nice!')
-                    }} >Click me!</button>
-                    {movies.map((movie) => {
-                        return <MovieCard key={movie._id} movieData={movie} />;
-                    })}
-                </div>
-            );
-        }       
+            return <div className="main-view">The list is empty!</div>;
+        }
+
+        return (
+            <div className="main-view">
+                {movies.map(movie =>
+                <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} />
+                )}
+            </div>
+        );   
+
     }
 }
