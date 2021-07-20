@@ -40,7 +40,7 @@ export class MainView extends React.Component{
     render(){
         const {movies, selectedMovie} = this.state;
 
-        if (selectedMovie) return <MovieView movieData={selectedMovie} />;
+        if (selectedMovie) return <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => {this.setSelectedMovie(newSelectedMovie); }} />;
 
         if (movies.length === 0){
             return <div className="main-view">The list is empty!</div>;

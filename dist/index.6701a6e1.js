@@ -22686,19 +22686,19 @@ class MainView extends _reactDefault.default.Component {
                     _id: 1,
                     Title: "Inception",
                     Description: "desc1",
-                    ImagePath: ".."
+                    ImagePath: "http://flxt.tmsimg.com/assets/p7825626_p_v10_af.jpg"
                 },
                 {
                     _id: 2,
                     Title: "The Shawshank Redemption",
                     Description: "desc2",
-                    ImagePath: ".."
+                    ImagePath: "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg"
                 },
                 {
                     _id: 3,
                     Title: "Gladiator",
                     Description: "desc2",
-                    ImagePath: ".."
+                    ImagePath: "https://images.unsplash.com/photo-1462747772350-460bb4aad7f4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                 }
             ],
             selectedMovie: null
@@ -22713,6 +22713,9 @@ class MainView extends _reactDefault.default.Component {
         const { movies , selectedMovie  } = this.state;
         if (selectedMovie) return(/*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
             movieData: selectedMovie,
+            onBackClick: (newSelectedMovie)=>{
+                this.setSelectedMovie(newSelectedMovie);
+            },
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 43
@@ -22776,7 +22779,7 @@ class MovieCard extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
             className: "movie-card",
             onClick: ()=>{
-                onMovieClick(movie);
+                onMovieClick(movieData);
             },
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
@@ -22961,7 +22964,7 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 class MovieView extends _reactDefault.default.Component {
     render() {
-        const { movieData  } = this.props;
+        const { movieData , onBackClick  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
             className: "movie-view",
             __source: {
@@ -23047,6 +23050,17 @@ class MovieView extends _reactDefault.default.Component {
                             ]
                         })
                     ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                    onClick: ()=>{
+                        onBackClick(null);
+                    },
+                    __source: {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 19
+                    },
+                    __self: this,
+                    children: "Back"
                 })
             ]
         }));
