@@ -1,53 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export class LoginView extends React.Component{
+import  './login-view.scss';
+
+
+export function LoginView(props){
     
-    constructor(props){
-        super(props);
+    const [ username, setUsername ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ registerFlag, setRegisterFlag] = useState('');
 
-        this.state = {
-            username : '',
-            password : ''
-        };
-
-        this.onUsernameChange = this.onUsernameChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    onUsernameChange(event) {
-        this.setState({
-            username: event.target.value
-        });
-    }
-
-    onPasswordChange(event){
-        this.setState({
-            password: event.target.value
-        });
-    }
-
-    handleSubmit(){
-        e.preventDefault();
-        const { username, password } = this.state;
-        console.log(username, password);
+    const handleSubmit = () => {
+        //e.preventDefault();
+        console.log(username, password, registerFlag);
         /* 
             Send a request to the server for authentication
             then call this.props.onLoggedIn(username)
         */
-            //this.props.onLoggedIn(username);        
-    }
+        props.onLoggedIn(username);        
+    };
 
-    render(){
-        return (
+    return (
+        <div className="login">
             <form>
-                <label>Username: </label>
-                <input type="text" value={this.state.username} onChange={this.onUsernameChange} />
-                <label>Password: </label>
-                <input type="password" value={this.state.password} onChange={this.onPasswordChange} />
-                <button type="button" onClick={this.handleSubmit}>Submit</button>
+                <label htmlFor="username">Username: </label>
+                <input type="text" value={username} id="username" name="username" placeholder="jd01" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                <label htmlFor="password">Password: </label>
+                <input type="password" value={password} id="password" id="password" name="password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                <button type="button" onClick={handleSubmit}>Submit</button>
             </form>
-        );
-    }
+            <button className="cursor-pointer" onClick={ e => setRegisterFlag(1)}>Register</button>
+        </div>
+    );
 
 }

@@ -1,64 +1,57 @@
 import React from 'react';
 import Axios from 'axios';
 
+import {LoginView} from '../login-view/login-view';
+import {RegisterView} from '../register-view/register-view';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
-import axios from 'axios';
+
+import  './main-view.scss';
 
 export class MainView extends React.Component{
 
     constructor(){
         super();
-        this.state = {
-            movies : [
-                {
-                    _id : 1,
-                    title: "Inception",
-                    description: "Dom Cobb (Leonardo DiCaprio) is a thief with the rare ability to enter people's dreams and steal their secrets from their subconscious. His skill has made him a hot commodity in the world of corporate espionage but has also cost him everything he loves. Cobb gets a chance at redemption when he is offered a seemingly impossible task: Plant an idea in someone's mind. If he succeeds, it will be the perfect crime, but a dangerous enemy anticipates Cobb's every move.",
-                    director: "Christopher Nolan",
-                    genre: "Sci-Fi",
-                    rating: "PG-13",
-                    release: "July 13, 2010", 
-                    imagePath: "https://images.pexels.com/photos/804416/pexels-photo-804416.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                },
-                {
-                    _id : 2,
-                    title: "The Shawshank Redemption",
-                    description: "Andy Dufresne (Tim Robbins) is sentenced to two consecutive life terms in prison for the murders of his wife and her lover and is sentenced to a tough prison. However, only Andy knows he didn't commit the crimes. While there, he forms a friendship with Red (Morgan Freeman), experiences brutality of prison life, adapts, helps the warden, etc., all in 19 years.",
-                    director: "Frank Darabont",
-                    genre: "Crime",
-                    rating: "R",
-                    release: "September 22, 1994", 
-                    imagePath: "https://images.pexels.com/photos/8104373/pexels-photo-8104373.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-                },
-                {
-                    _id : 3,
-                    title: "Gladiator",
-                    description: "Gladiator is a 2000 epic historical drama film directed by Ridley Scott and written by David Franzoni, John Logan, and William Nicholson. ... Crowe portrays Roman general Maximus Decimus Meridius, who is betrayed when Commodus, the ambitious son of Emperor Marcus Aurelius, murders his father and seizes the throne.",
-                    director: "Ridley Scott",
-                    genre: "Action",
-                    rating: "R",
-                    release: "May 5, 2000",                   
-                    imagePath: "https://images.pexels.com/photos/4172678/pexels-photo-4172678.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                }
-            ],
-            selectedMovie: null
+        this.state = { //initial state is set to null
+            movies : [],
+            selectedMovie: null,
+            registerFlag: null,
+            user: null
         }
     }
 
+    /* when a movie is clicked, this function is invocked and updates the sate of the 'selectedMovie' property to that movie */
     setSelectedMovie(newSelectedMovie){
         this.setState({
             selectedMovie : newSelectedMovie
         });
     }
 
+    /* when a user successfully logs in, this function updates the 'user' property in state to that *particular* user */
+    onLoggedIn(newuser){
+        this.setState({
+            user: newuser
+        });
+    }
+
+    onRegister(register) {
+        this.setState({
+          register
+        });
+    }
+
     render(){
-        const {movies, selectedMovie} = this.state;
+        const {movies, selectedMovie, user, registerFlag} = this.state;
 
-        if (movies.length === 0){
+        /* if there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView */
+        if(!user)
+            return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />        
+
+        // before the movies have been loaded
+        if (movies.length === 0)
             return <div className="main-view"></div>;
-        }
 
+        /* if the state of 'selectedMovie' is not null, that seleced movie will be returned otherwise, all *movies will be returned*  */
         return (
             <div className="main-view">
                 { selectedMovie
@@ -71,11 +64,11 @@ export class MainView extends React.Component{
         );  
     }
 
-    /*componentDidMount(){
-        //axios.get('https://cinefiles-api.herokuapp.com/movies')
-        axios.get('http://localhost:8080/movies')
+    componentDidMount(){
+        Axios.get('https://cinefiles-api.herokuapp.com/movies')
+        //Axios.get('http://localhost:8080/movies')
         .then(response => {
-            console.log(response.data);
+            //console.log(response.data);
             this.setState({
                 movies: response.data
             });
@@ -83,6 +76,6 @@ export class MainView extends React.Component{
         .catch(error => {
             console.log(error);
         });
-    }*/
+    }
 
 }

@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import  './movie-view.scss';
 
 export class MovieView extends React.Component{
 
@@ -27,11 +30,11 @@ export class MovieView extends React.Component{
                 </div>
                 <div className="movie-director movie-details-container">
                     <span className="label">Rating: </span>
-                    <span className="value">{movieData.rating}</span>
+                    <span className="value">{movieData.rating.name}</span>
                 </div>
                 <div className="movie-director movie-details-container">
                     <span className="label">Genre: </span>
-                    <span className="value">{movieData.genre}</span>
+                    <span className="value">{movieData.genre.name}</span>
                 </div>
                 <div className="movie-director movie-details-container">
                     <span className="label">Release Date: </span>
@@ -39,7 +42,7 @@ export class MovieView extends React.Component{
                 </div>
                 <div className="movie-director movie-details-container">
                     <span className="label">Director: </span>
-                    <span className="value">{movieData.director}</span>
+                    <span className="value">{movieData.director.name}</span>
                 </div>
                 <div className="movie-description movie-details-container">
                     <span className="label">Description: </span>
@@ -51,4 +54,34 @@ export class MovieView extends React.Component{
         );
     }
 
+}
+
+MovieView.propTypes = {
+    movieData: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        budget: PropTypes.string,
+        cast: PropTypes.array,
+        diretor: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            bio: PropTypes.string,
+            birthdate: PropTypes.string,
+            deathdate: PropTypes.string,
+        }),
+        featured: PropTypes.string,
+        genre: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string
+        }),
+        gross: PropTypes.string,
+        imagePath: PropTypes.string,
+        rating: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string
+        }),
+        release: PropTypes.string,
+        runtime: PropTypes.string,
+        year: PropTypes.string
+    }).isRequired,
+    onMovieClick: PropTypes.func.isRequired
 }
