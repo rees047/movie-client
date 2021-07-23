@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from 'react-bootstrap/Button';
 
 import  './movie-view.scss';
 
@@ -49,7 +50,7 @@ export class MovieView extends React.Component{
                     <span className="value">{movieData.description}:</span>
                 </div>     
                 <br/>
-                <button className="cursor-pointer" onClick={() => { onBackClick(null); }}>Back</button>
+                <Button className="custom-button" type="button" onClick={() => { onBackClick(null); }}>Back</Button>
             </div>
         );
     }
