@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 import  './login-view.scss';
 
@@ -19,16 +23,27 @@ export function LoginView(props){
     };
 
     return (
-        <div className="login">
-            <form>
-                <label htmlFor="username">Username: </label>
-                <input type="text" value={username} id="username" name="username" placeholder="jd01" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
-                <label htmlFor="password">Password: </label>
-                <input type="password" value={password} id="password" id="password" name="password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
-                <button type="button" onClick={handleSubmit}>Submit</button>
-            </form>
-            <button className="cursor-pointer" onClick={() => { props.onRegisterClick(true); }}>Register</button>
-        </div>
+        <Row id="login" className="justify-content-md-center">
+            <Col className="border" md={8}>
+                <Form>
+                    <Form.Group controlID = "formGroupUsername">
+                        <Form.Label>Username:</Form.Label>
+                        <Form.Control type="text" value={username} id="username" name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                    </Form.Group>
+                    <Form.Group controlID = "formGroupPassword">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control type="password" value={password} id="password" id="password" name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                    </Form.Group>
+                    <Button className="custom-button" type="button" onClick={handleSubmit}>Submit</Button>
+                </Form>
+                <Row>
+                    <Col md={8}>
+                        <br/>
+                        <Button className="custom-button" type="button" onClick={() => { props.onRegisterClick(true); }}>Register</Button>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     );
 
 }

@@ -2,10 +2,19 @@
 
 
 
-.CineFiles {
-  color: steelblue;
+#CineFiles-Client {
+  color: #2D93AD;
   font-family: "Courier New", Courier, monospace;
-  font-size: small;
+}
+
+.custom-button {
+  background-color: #2D93AD !important;
+  border-color: #2D93AD !important;
+}
+
+.custom-button:hover {
+  background-color: #42A5BE !important;
+  border-color: #42A5BE !important;
 }
 
 .label {
