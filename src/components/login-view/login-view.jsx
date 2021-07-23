@@ -7,11 +7,10 @@ export function LoginView(props){
     
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
-    const [ registerFlag, setRegisterFlag] = useState('');
-
-    const handleSubmit = () => {
-        //e.preventDefault();
-        console.log(username, password, registerFlag);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(username, password);
         /* 
             Send a request to the server for authentication
             then call this.props.onLoggedIn(username)
@@ -28,7 +27,7 @@ export function LoginView(props){
                 <input type="password" value={password} id="password" id="password" name="password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
                 <button type="button" onClick={handleSubmit}>Submit</button>
             </form>
-            <button className="cursor-pointer" onClick={ e => setRegisterFlag(1)}>Register</button>
+            <button className="cursor-pointer" onClick={() => { props.onRegisterClick(true); }}>Register</button>
         </div>
     );
 

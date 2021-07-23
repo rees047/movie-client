@@ -68,7 +68,7 @@ MovieView.propTypes = {
             birthdate: PropTypes.string,
             deathdate: PropTypes.string,
         }),
-        featured: PropTypes.string,
+        featured: PropTypes.boolean,
         genre: PropTypes.shape({
             name: PropTypes.string.isRequired,
             description: PropTypes.string
@@ -82,6 +82,5 @@ MovieView.propTypes = {
         release: PropTypes.string,
         runtime: PropTypes.string,
         year: PropTypes.string
-    }).isRequired,
-    onMovieClick: PropTypes.func.isRequired
+    }).isRequired
 }

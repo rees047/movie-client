@@ -34,9 +34,9 @@ export class MainView extends React.Component{
         });
     }
 
-    onRegister(register) {
+    onRegisterClick(registerFlag){
         this.setState({
-          register
+            registerFlag: registerFlag
         });
     }
 
@@ -44,8 +44,12 @@ export class MainView extends React.Component{
         const {movies, selectedMovie, user, registerFlag} = this.state;
 
         /* if there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView */
-        if(!user)
-            return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />        
+        if(!user && !registerFlag)
+            return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} onRegisterClick={registerFlag => this.onRegisterClick(true)} />
+
+        /* if register button is clicked, load Register View. */
+        if(registerFlag)
+            return <RegisterView onBackClick={registerFlag => this.onRegisterClick(false)} />
 
         // before the movies have been loaded
         if (movies.length === 0)
@@ -62,7 +66,7 @@ export class MainView extends React.Component{
                 }
             </div>
         );  
-    }
+    } 
 
     componentDidMount(){
         Axios.get('https://cinefiles-api.herokuapp.com/movies')

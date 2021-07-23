@@ -22702,19 +22702,30 @@ class MainView extends _reactDefault.default.Component {
             user: newuser
         });
     }
-    onRegister(register) {
+    onRegisterClick(registerFlag) {
         this.setState({
-            register
+            registerFlag: registerFlag
         });
     }
     render() {
         const { movies , selectedMovie , user , registerFlag  } = this.state;
-        /* if there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView */ if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
+        /* if there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView */ if (!user && !registerFlag) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
             onLoggedIn: (newUser)=>this.onLoggedIn(newUser)
+            ,
+            onRegisterClick: (registerFlag1)=>this.onRegisterClick(true)
             ,
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 48
+            },
+            __self: this
+        }));
+        /* if register button is clicked, load Register View. */ if (registerFlag) return(/*#__PURE__*/ _jsxRuntime.jsx(_registerView.RegisterView, {
+            onBackClick: (registerFlag1)=>this.onRegisterClick(false)
+            ,
+            __source: {
+                fileName: "src/components/main-view/main-view.jsx",
+                lineNumber: 52
             },
             __self: this
         }));
@@ -22723,7 +22734,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 52
+                lineNumber: 56
             },
             __self: this
         }));
@@ -22731,7 +22742,7 @@ class MainView extends _reactDefault.default.Component {
             className: "main-view",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 56
+                lineNumber: 60
             },
             __self: this,
             children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
@@ -22741,7 +22752,7 @@ class MainView extends _reactDefault.default.Component {
                 },
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 58
+                    lineNumber: 62
                 },
                 __self: this
             }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
@@ -22751,7 +22762,7 @@ class MainView extends _reactDefault.default.Component {
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 61
+                        lineNumber: 65
                     },
                     __self: this
                 }, movie._id)
@@ -24162,10 +24173,9 @@ function LoginView(props) {
     _s();
     const [username, setUsername] = _react.useState('');
     const [password, setPassword] = _react.useState('');
-    const [registerFlag, setRegisterFlag] = _react.useState('');
-    const handleSubmit = ()=>{
-        //e.preventDefault();
-        console.log(username, password, registerFlag);
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        console.log(username, password);
         /* 
             Send a request to the server for authentication
             then call this.props.onLoggedIn(username)
@@ -24175,14 +24185,14 @@ function LoginView(props) {
         className: "login",
         __source: {
             fileName: "src/components/login-view/login-view.jsx",
-            lineNumber: 23
+            lineNumber: 22
         },
         __self: this,
         children: [
             /*#__PURE__*/ _jsxRuntime.jsxs("form", {
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 24
+                    lineNumber: 23
                 },
                 __self: this,
                 children: [
@@ -24190,7 +24200,7 @@ function LoginView(props) {
                         htmlFor: "username",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 25
+                            lineNumber: 24
                         },
                         __self: this,
                         children: "Username: "
@@ -24207,7 +24217,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 26
+                            lineNumber: 25
                         },
                         __self: this
                     }),
@@ -24215,7 +24225,7 @@ function LoginView(props) {
                         htmlFor: "password",
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 27
+                            lineNumber: 26
                         },
                         __self: this,
                         children: "Password: "
@@ -24232,7 +24242,7 @@ function LoginView(props) {
                         ,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 28
+                            lineNumber: 27
                         },
                         __self: this
                     }),
@@ -24241,7 +24251,7 @@ function LoginView(props) {
                         onClick: handleSubmit,
                         __source: {
                             fileName: "src/components/login-view/login-view.jsx",
-                            lineNumber: 29
+                            lineNumber: 28
                         },
                         __self: this,
                         children: "Submit"
@@ -24250,11 +24260,12 @@ function LoginView(props) {
             }),
             /*#__PURE__*/ _jsxRuntime.jsx("button", {
                 className: "cursor-pointer",
-                onClick: (e)=>setRegisterFlag(1)
-                ,
+                onClick: ()=>{
+                    props.onRegisterClick(true);
+                },
                 __source: {
                     fileName: "src/components/login-view/login-view.jsx",
-                    lineNumber: 31
+                    lineNumber: 30
                 },
                 __self: this,
                 children: "Register"
@@ -24262,7 +24273,7 @@ function LoginView(props) {
         ]
     }));
 }
-_s(LoginView, "Rase5iW3KJeiL57gdMzol8I7+Q4=");
+_s(LoginView, "9FY2cPL9VBDmuhjwpF2ik6flsHs=");
 _c = LoginView;
 var _c;
 $RefreshReg$(_c, "LoginView");
@@ -24448,180 +24459,198 @@ function RegisterView(props) {
     const [lastName, setLastName] = _react.useState('');
     const [email, setEmail] = _react.useState('');
     const [birthDate, setBirthDate] = _react.useState('');
-    const handleSubmit = ()=>{
-        //e.preventDefault();
+    const handleSubmit = (e)=>{
+        e.preventDefault();
         console.log(username, password, firstName, lastName, email, birthDate);
-        /* 
-            Send a request to the server for authentication
-            then call this.props.onLoggedIn(username)
-        */ props.onLoggedIn(username);
     };
-    return(/*#__PURE__*/ _jsxRuntime.jsxs("form", {
+    return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
+        className: "register",
         __source: {
             fileName: "src/components/register-view/register-view.jsx",
-            lineNumber: 26
+            lineNumber: 21
         },
         __self: this,
         children: [
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "username",
+            /*#__PURE__*/ _jsxRuntime.jsxs("form", {
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 27
+                    lineNumber: 22
                 },
                 __self: this,
-                children: "Username: "
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "username",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 23
+                        },
+                        __self: this,
+                        children: "Username: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "text",
+                        value: username,
+                        id: "username",
+                        name: "username",
+                        placeholder: "jd01",
+                        minLength: "5",
+                        maxLength: "20",
+                        onChange: (e)=>setUsername(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 24
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "password",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 25
+                        },
+                        __self: this,
+                        children: "Password: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "password",
+                        value: password,
+                        id: "password",
+                        id: "password",
+                        name: "password",
+                        minLength: "5",
+                        maxLength: "20",
+                        onChange: (e)=>setPassword(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 26
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "firstName",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 27
+                        },
+                        __self: this,
+                        children: "First Name: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "text",
+                        value: firstName,
+                        id: "firstName",
+                        name: "firstName",
+                        placeholder: "John",
+                        minLength: "2",
+                        maxLength: "20",
+                        onChange: (e)=>setFirstName(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 28
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "lastName",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 29
+                        },
+                        __self: this,
+                        children: "Last Name: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "text",
+                        value: lastName,
+                        id: "lastName",
+                        name: "lastName",
+                        placeholder: "Doe",
+                        minLength: "2",
+                        maxLength: "20",
+                        onChange: (e)=>setLastName(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 30
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "email",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 31
+                        },
+                        __self: this,
+                        children: "Email Address: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "text",
+                        value: email,
+                        id: "email",
+                        name: "lastName",
+                        placeholder: "jd01@johndoe.com",
+                        minLength: "5",
+                        maxLength: "20",
+                        onChange: (e)=>setEmail(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 32
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("label", {
+                        htmlFor: "birthDate",
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 33
+                        },
+                        __self: this,
+                        children: "Birthday: "
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                        type: "date",
+                        value: birthDate,
+                        id: "birthDate",
+                        name: "birthDate",
+                        placeholder: "2021-07-22",
+                        min: "1900-01-01",
+                        max: "2022-12-31",
+                        onChange: (e)=>setBirthDate(e.target.value)
+                        ,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 34
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                        type: "button",
+                        onClick: handleSubmit,
+                        __source: {
+                            fileName: "src/components/register-view/register-view.jsx",
+                            lineNumber: 35
+                        },
+                        __self: this,
+                        children: "Submit"
+                    })
+                ]
             }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "text",
-                value: username,
-                id: "username",
-                name: "username",
-                placeholder: "jd01",
-                minLength: "5",
-                maxLength: "20",
-                onChange: (e)=>setUsername(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 28
+            /*#__PURE__*/ _jsxRuntime.jsx("button", {
+                className: "cursor-pointer",
+                onClick: ()=>{
+                    props.onBackClick(false);
                 },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "password",
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 29
-                },
-                __self: this,
-                children: "Password: "
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "password",
-                value: password,
-                id: "password",
-                id: "password",
-                name: "password",
-                minLength: "5",
-                maxLength: "20",
-                onChange: (e)=>setPassword(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 30
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "firstName",
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 31
-                },
-                __self: this,
-                children: "First Name: "
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "text",
-                value: firstName,
-                id: "firstName",
-                name: "firstName",
-                placeholder: "John",
-                minLength: "2",
-                maxLength: "20",
-                onChange: (e)=>setFirstName(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 32
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "lastName",
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 33
-                },
-                __self: this,
-                children: "Last Name: "
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "text",
-                value: lastName,
-                id: "lastName",
-                name: "lastName",
-                placeholder: "Doe",
-                minLength: "2",
-                maxLength: "20",
-                onChange: (e)=>setLastName(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 34
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "email",
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 35
-                },
-                __self: this,
-                children: "Email Address: "
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "text",
-                value: email,
-                id: "email",
-                name: "lastName",
-                placeholder: "jd01@johndoe.com",
-                minLength: "5",
-                maxLength: "20",
-                onChange: (e)=>setEmail(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 36
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("label", {
-                htmlFor: "birthDate",
                 __source: {
                     fileName: "src/components/register-view/register-view.jsx",
                     lineNumber: 37
                 },
                 __self: this,
-                children: "Birthday: "
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("input", {
-                type: "date",
-                value: birthDate,
-                id: "birthDate",
-                name: "birthDate",
-                placeholder: "2021-07-22",
-                min: "1900-01-01",
-                max: "2022-12-31",
-                onChange: (e)=>setBirthDate(e.target.value)
-                ,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 38
-                },
-                __self: this
-            }),
-            /*#__PURE__*/ _jsxRuntime.jsx("button", {
-                type: "button",
-                onClick: handleSubmit,
-                __source: {
-                    fileName: "src/components/register-view/register-view.jsx",
-                    lineNumber: 39
-                },
-                __self: this,
-                children: "Submit"
+                children: "Back"
             })
         ]
     }));
@@ -25632,7 +25661,7 @@ MovieView.propTypes = {
             birthdate: _propTypesDefault.default.string,
             deathdate: _propTypesDefault.default.string
         }),
-        featured: _propTypesDefault.default.string,
+        featured: _propTypesDefault.default.boolean,
         genre: _propTypesDefault.default.shape({
             name: _propTypesDefault.default.string.isRequired,
             description: _propTypesDefault.default.string
@@ -25646,8 +25675,7 @@ MovieView.propTypes = {
         release: _propTypesDefault.default.string,
         runtime: _propTypesDefault.default.string,
         year: _propTypesDefault.default.string
-    }).isRequired,
-    onMovieClick: _propTypesDefault.default.func.isRequired
+    }).isRequired
 };
 
   helpers.postlude(module);
