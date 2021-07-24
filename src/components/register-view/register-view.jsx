@@ -26,29 +26,29 @@ export function RegisterView(props){
         <Row id="register" className="justify-content-md-center">
             <Col className="border" md={8}>
                 <Form>
-                    <Form.Group controlID = "formGroupUsername">
+                    <Form.Group controlId = "formGroupUsername">
                         <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" value={username} id="username" name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                        <Form.Control type="text" value={username} name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "formGroupPassword">
+                    <Form.Group controlId = "formGroupPassword">
                         <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" value={password} id="password" id="password" name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                        <Form.Control type="password" value={password} name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "formGroupFirstName">
+                    <Form.Group controlId = "formGroupFirstName">
                         <Form.Label>First Name:</Form.Label>
-                        <Form.Control type="text" value={firstName} id="firstName" name="firstName" placeholder="John" minLength="2" maxLength="20" onChange={e => setFirstName(e.target.value)} />
+                        <Form.Control type="text" value={firstName} name="firstName" placeholder="John" minLength="2" maxLength="20" onChange={e => setFirstName(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "formGroupLastName">
+                    <Form.Group controlId = "formGroupLastName">
                         <Form.Label>Last Name:</Form.Label>
-                        <Form.Control type="text" value={lastName} id="lastName" name="lastName" placeholder="Doe" minLength="2" maxLength="20" onChange={e => setLastName(e.target.value)} />
+                        <Form.Control type="text" value={lastName} name="lastName" placeholder="Doe" minLength="2" maxLength="20" onChange={e => setLastName(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "formGroupEmail">
+                    <Form.Group controlId = "formGroupEmail">
                         <Form.Label>Email Address:</Form.Label>
-                        <Form.Control type="email" value={email} id="email" name="lastName" placeholder="jd01@johndoe.com" minLength="5" maxLength="20" onChange={e => setEmail(e.target.value)} />
+                        <Form.Control type="email" value={email} name="lastName" placeholder="jd01@johndoe.com" minLength="5" maxLength="20" onChange={e => setEmail(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "Birthday">
-                        <Form.Label>Birthday:</Form.Label>
-                        <Form.Control type="date" value={birthDate} id="birthDate" name="birthDate" placeholder="2021-07-22" min="1900-01-01" max="2022-12-31" onChange={e => setBirthDate(e.target.value)} />
+                    <Form.Group controlId = "Birthdate">
+                        <Form.Label>Birthdate:</Form.Label>
+                        <Form.Control type="date" value={birthDate} name="birthDate" placeholder="2021-07-22" min="1900-01-01" max="2022-12-31" onChange={e => setBirthDate(e.target.value)} />
                     </Form.Group>
                     <Button className="custom-button" type="button" onClick={handleSubmit}>Submit</Button>
                 </Form>

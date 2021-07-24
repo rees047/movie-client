@@ -24236,7 +24236,7 @@ function LoginView(props) {
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupUsername",
+                            controlId: "formGroupUsername",
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
                                 lineNumber: 30
@@ -24254,7 +24254,6 @@ function LoginView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "text",
                                     value: username,
-                                    id: "username",
                                     name: "username",
                                     placeholder: "enter username",
                                     minLength: "5",
@@ -24270,7 +24269,7 @@ function LoginView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupPassword",
+                            controlId: "formGroupPassword",
                             __source: {
                                 fileName: "src/components/login-view/login-view.jsx",
                                 lineNumber: 34
@@ -24288,8 +24287,6 @@ function LoginView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "password",
                                     value: password,
-                                    id: "password",
-                                    id: "password",
                                     name: "password",
                                     placeholder: "enter password",
                                     minLength: "5",
@@ -26505,7 +26502,7 @@ function RegisterView(props) {
                     __self: this,
                     children: [
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupUsername",
+                            controlId: "formGroupUsername",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 29
@@ -26523,7 +26520,6 @@ function RegisterView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "text",
                                     value: username,
-                                    id: "username",
                                     name: "username",
                                     placeholder: "enter username",
                                     minLength: "5",
@@ -26539,7 +26535,7 @@ function RegisterView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupPassword",
+                            controlId: "formGroupPassword",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 33
@@ -26557,8 +26553,6 @@ function RegisterView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "password",
                                     value: password,
-                                    id: "password",
-                                    id: "password",
                                     name: "password",
                                     placeholder: "enter password",
                                     minLength: "5",
@@ -26574,7 +26568,7 @@ function RegisterView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupFirstName",
+                            controlId: "formGroupFirstName",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 37
@@ -26592,7 +26586,6 @@ function RegisterView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "text",
                                     value: firstName,
-                                    id: "firstName",
                                     name: "firstName",
                                     placeholder: "John",
                                     minLength: "2",
@@ -26608,7 +26601,7 @@ function RegisterView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupLastName",
+                            controlId: "formGroupLastName",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 41
@@ -26626,7 +26619,6 @@ function RegisterView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "text",
                                     value: lastName,
-                                    id: "lastName",
                                     name: "lastName",
                                     placeholder: "Doe",
                                     minLength: "2",
@@ -26642,7 +26634,7 @@ function RegisterView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "formGroupEmail",
+                            controlId: "formGroupEmail",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 45
@@ -26660,7 +26652,6 @@ function RegisterView(props) {
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "email",
                                     value: email,
-                                    id: "email",
                                     name: "lastName",
                                     placeholder: "jd01@johndoe.com",
                                     minLength: "5",
@@ -26676,7 +26667,7 @@ function RegisterView(props) {
                             ]
                         }),
                         /*#__PURE__*/ _jsxRuntime.jsxs(_formDefault.default.Group, {
-                            controlID: "Birthday",
+                            controlId: "Birthdate",
                             __source: {
                                 fileName: "src/components/register-view/register-view.jsx",
                                 lineNumber: 49
@@ -26689,12 +26680,11 @@ function RegisterView(props) {
                                         lineNumber: 50
                                     },
                                     __self: this,
-                                    children: "Birthday:"
+                                    children: "Birthdate:"
                                 }),
                                 /*#__PURE__*/ _jsxRuntime.jsx(_formDefault.default.Control, {
                                     type: "date",
                                     value: birthDate,
-                                    id: "birthDate",
                                     name: "birthDate",
                                     placeholder: "2021-07-22",
                                     min: "1900-01-01",

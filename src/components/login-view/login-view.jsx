@@ -27,13 +27,13 @@ export function LoginView(props){
         <Row id="login" className="justify-content-md-center">
             <Col className="border" md={8}>
                 <Form>
-                    <Form.Group controlID = "formGroupUsername">
+                    <Form.Group controlId = "formGroupUsername">
                         <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" value={username} id="username" name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                        <Form.Control type="text" value={username} name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
                     </Form.Group>
-                    <Form.Group controlID = "formGroupPassword">
+                    <Form.Group controlId = "formGroupPassword">
                         <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" value={password} id="password" id="password" name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                        <Form.Control type="password" value={password} name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
                     </Form.Group>
                     <Button className="custom-button" type="button" onClick={handleSubmit}>Submit</Button>
                 </Form>
