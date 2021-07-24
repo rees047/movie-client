@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -61,4 +62,13 @@ export function RegisterView(props){
         </Row>
     );
 
+}
+
+RegisterView.propTypes = {
+    username: PropTypes.string,
+    password: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    email: PropTypes.string,
+    birthdate: PropTypes.date,
 }

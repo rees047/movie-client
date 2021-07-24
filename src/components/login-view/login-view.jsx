@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -46,4 +47,9 @@ export function LoginView(props){
         </Row>
     );
 
+}
+
+LoginView.propTypes = {
+    username: PropTypes.string,
+    password: PropTypes.string
 }
