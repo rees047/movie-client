@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import  './register-view.scss';
 
@@ -38,4 +39,13 @@ export function RegisterView(props){
         </div>
     );
 
+}
+
+RegisterView.propTypes = {
+    username: PropTypes.string,
+    password: PropTypes.string,
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    email: PropTypes.string,
+    birthdate: PropTypes.date,
 }
