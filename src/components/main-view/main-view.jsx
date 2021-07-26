@@ -56,9 +56,7 @@ export class MainView extends React.Component{
                             if (movies.length === 0) return <div className="main-view"></div>
 
                             return movies.map(movie => (
-                                <Col md={3} key={movie._id}>
-                                    <MovieCard key={movie._id} movieData={movie} /> 
-                                </Col>
+                                <MovieCard key={movie._id} movieData={movie} /> 
                                 //add logout button <button onClick={() => {this.onLoggedOut()}}>Logout</button>
                             ))
                             

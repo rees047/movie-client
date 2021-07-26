@@ -22926,11 +22926,8 @@ class MainView extends _reactDefault.default.Component {
                             if (movies.length === 0) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
                                 className: "main-view"
                             }));
-                            return movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-                                    md: 3,
-                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                                        movieData: movie
-                                    }, movie._id)
+                            return movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                                    movieData: movie
                                 }, movie._id)
                             );
                         },
@@ -22951,7 +22948,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 67
+                            lineNumber: 65
                         },
                         __self: this
                     }),
@@ -22977,7 +22974,7 @@ class MainView extends _reactDefault.default.Component {
                         },
                         __source: {
                             fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 72
+                            lineNumber: 70
                         },
                         __self: this
                     })
@@ -39902,6 +39899,10 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _card = require("react-bootstrap/Card");
@@ -39910,67 +39911,75 @@ var _reactRouterDom = require("react-router-dom");
 class MovieCard extends _reactDefault.default.Component {
     render() {
         const { movieData  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+            lg: 3,
             __source: {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 16
+                lineNumber: 17
             },
             __self: this,
-            children: [
-                /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
-                    variant: "top",
-                    src: movieData.imagePath,
-                    crossOrigin: "anonymous",
-                    height: "400",
-                    __source: {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 17
-                    },
-                    __self: this
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
-                    __source: {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 18
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 19
-                            },
-                            __self: this,
-                            children: movieData.title
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 20
-                            },
-                            __self: this,
-                            children: movieData.description
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: `/movies/${movieData.title}`,
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 21
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "link",
+            children: /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
+                __source: {
+                    fileName: "src/components/movie-card/movie-card.jsx",
+                    lineNumber: 18
+                },
+                __self: this,
+                children: [
+                    /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Img, {
+                        variant: "top",
+                        src: movieData.imagePath,
+                        crossOrigin: "anonymous",
+                        height: "400",
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 19
+                        },
+                        __self: this
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
+                        __source: {
+                            fileName: "src/components/movie-card/movie-card.jsx",
+                            lineNumber: 20
+                        },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
+                                __source: {
+                                    fileName: "src/components/movie-card/movie-card.jsx",
+                                    lineNumber: 21
+                                },
+                                __self: this,
+                                children: movieData.title
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                                 __source: {
                                     fileName: "src/components/movie-card/movie-card.jsx",
                                     lineNumber: 22
                                 },
                                 __self: this,
-                                children: "Open"
+                                children: movieData.description
+                            }),
+                            /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                to: `/movies/${movieData.title}`,
+                                __source: {
+                                    fileName: "src/components/movie-card/movie-card.jsx",
+                                    lineNumber: 23
+                                },
+                                __self: this,
+                                children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                    variant: "link",
+                                    __source: {
+                                        fileName: "src/components/movie-card/movie-card.jsx",
+                                        lineNumber: 24
+                                    },
+                                    __self: this,
+                                    children: "Open"
+                                })
                             })
-                        })
-                    ]
-                })
-            ]
+                        ]
+                    })
+                ]
+            })
         }));
     }
 }
@@ -39985,7 +39994,7 @@ MovieCard.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"ikZdr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Card":"MoOk8","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-bootstrap/Col":"fbam0","react-bootstrap/Row":"c0x1x"}],"ikZdr":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
