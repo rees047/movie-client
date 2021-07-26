@@ -15,7 +15,6 @@ export function LoginView(props){
     
     const handleSubmit = (e) => {
         e.preventDefault();
-
         
         //Send a request to the server for authentication
         //Axios.post('https://cinefiles-api.herokuapp.com/login', {
