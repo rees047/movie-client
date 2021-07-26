@@ -35,4 +35,12 @@ html body {
 #register img {
   height: 200px;
 }
+
+.error-msg {
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 1.5em;
+  padding: 0.25em;
+}
 /*# sourceMappingURL=index.1d334ea1.css.map */

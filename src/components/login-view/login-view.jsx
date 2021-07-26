@@ -12,22 +12,28 @@ export function LoginView(props){
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
+    const [errMsg, setErrMsg] = useState();
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        //Send a request to the server for authentication
-        //Axios.post('https://cinefiles-api.herokuapp.com/login', {
-        Axios.post('http://localhost:8080/login', {
-            username: username,
-            password: password
-        }).then(response => {
-            const data = response.data;
-            props.onLoggedIn(data);  
-        }).catch (e => {
-            console.log(e.response.data);
-            //console.log('no such user');
-        });
+        setErrMsg('');
+
+        if(!username || !password){
+            setErrMsg('Missing Credentials');
+        }else{
+            //Send a request to the server for authentication
+            //Axios.post('https://cinefiles-api.herokuapp.com/login', {
+            Axios.post('http://localhost:8080/login', {
+                username: username,
+                password: password
+            }).then(response => {
+                const data = response.data;
+                props.onLoggedIn(data);  
+            }).catch (e => {
+                setErrMsg(e.response.data.message.message);
+                //console.log('no such user');
+            });
+        }
     
         //console.log(username, password);
     };
@@ -49,7 +55,7 @@ export function LoginView(props){
                             </Row>
                             <Row>
                                 <Col>
-                                    <p className="error-msg"></p>
+                                    <p className="error-msg">{errMsg}</p>
                                 </Col>
                             </Row>
                             <Row>
