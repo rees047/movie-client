@@ -38,10 +38,10 @@ export function LoginView(props){
             <Row className="align-items-center has-height-600">
                 <Col fluid="true">
                     <Row>
-                        <Col md={5}>
+                        <Col lg={6}>
                             <Image src={logo} rounded alt="Cinema-Files-Logo" className="logo-image" />
                         </Col>
-                        <Col md={7}>
+                        <Col lg={6}>
                             <Row>
                                 <Col>
                                     <h2 className="text-center">CineFiles</h2>
@@ -49,7 +49,6 @@ export function LoginView(props){
                             </Row>
                             <Row>
                                 <Col>
-                                
                                     <p className="error-msg"></p>
                                 </Col>
                             </Row>

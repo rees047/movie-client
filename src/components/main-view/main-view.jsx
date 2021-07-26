@@ -45,20 +45,15 @@ export class MainView extends React.Component{
     }
 
     render(){
-        const {movies, user} = this.state;       
+        const {movies, user} = this.state;  
 
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
-
                         <Route exact path="/" render = {() => {
                             if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
-                               
-                            
 
-                            if (movies.length === 0)
-                            return <div className="main-view"></div>
-
+                            if (movies.length === 0) return <div className="main-view"></div>
 
                             return movies.map(movie => (
                                 <Col md={3} key={movie._id}>
@@ -71,9 +66,7 @@ export class MainView extends React.Component{
 
                         <Route path="/register" render = {() => {
                             if(user) return <Redirect to="/" />
-
-                            return
-                            <RegisterView />
+                            return <RegisterView />
                         }} />
 
                         <Route path="/movies/:title" render = {({ match, history }) => {

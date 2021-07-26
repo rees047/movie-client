@@ -25,9 +25,14 @@ html body {
 
 .has-height-600 {
   height: 600px;
+  margin-top: 20%;
 }
 
 .logo-image {
   height: 300px;
+}
+
+#register img {
+  height: 200px;
 }
 /*# sourceMappingURL=index.1d334ea1.css.map */
