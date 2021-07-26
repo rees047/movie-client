@@ -1,5 +1,8 @@
 import React from 'react';
 import Axios from 'axios';
+
+import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
 
@@ -17,70 +20,95 @@ export class MainView extends React.Component{
         this.state = { //initial state is set to null
             movies : [],
             selectedMovie: null,
-            registerFlag: null,
             user: null
         }
-    }
-
-    /* when a movie is clicked, this function is invocked and updates the sate of the 'selectedMovie' property to that movie */
-    setSelectedMovie(newSelectedMovie){
-        this.setState({
-            selectedMovie : newSelectedMovie
-        });
-    }
+    }    
 
     /* when a user successfully logs in, this function updates the 'user' property in state to that *particular* user */
-    onLoggedIn(newuser){
+    onLoggedIn(authData){
+        //console.log(authData);
         this.setState({
-            user: newuser
+            user: authData.user.username
         });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('user', authData.user.username);
+        this.getMovies(authData.token)
     }
 
-    onRegisterClick(registerFlag){
+    onLoggedOut(){
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
         this.setState({
-            registerFlag: registerFlag
+            user: null
         });
     }
 
     render(){
-        const {movies, selectedMovie, user, registerFlag} = this.state;
+        const {movies, user} = this.state;       
 
-        /* if there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView */
-        if(!user && !registerFlag)
-            return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} onRegisterClick={registerFlag => this.onRegisterClick(true)} />
-
-        /* if register button is clicked, load Register View. */
-        if(registerFlag)
-            return <RegisterView onBackClick={registerFlag => this.onRegisterClick(false)} />
-
-        // before the movies have been loaded
-        if (movies.length === 0)
-            return <div className="main-view"></div>;
-
-        /* if the state of 'selectedMovie' is not null, that seleced movie will be returned otherwise, all *movies will be returned*  */
         return (
-            <Row className="main-view justify-content-md-center">
-                { selectedMovie
-                    ?   (
-                            <Col md={8}>
-                                <MovieView movieData={selectedMovie} onBackClick={newSelectedMovie => {this.setSelectedMovie(newSelectedMovie); }} />
-                            </Col>
-                        )
-                    :   movies.map(movie => ( 
-                            <Col md={3} key={movie._id}>
-                                <MovieCard key={movie._id} movieData={movie} onMovieClick={(movie) => { this.setSelectedMovie(movie) }} /> 
-                            </Col>
-                        ))
-                }
-            </Row>
-        );  
-    } 
+            <Router>
+                <Row className="main-view justify-content-md-center">
 
-    componentDidMount(){
-        Axios.get('https://cinefiles-api.herokuapp.com/movies')
-        //Axios.get('http://localhost:8080/movies')
+                        <Route exact path="/" render = {() => {
+                            if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
+                               
+                            
+
+                            if (movies.length === 0)
+                            return <div className="main-view"></div>
+
+
+                            return movies.map(movie => (
+                                <Col md={3} key={movie._id}>
+                                    <MovieCard key={movie._id} movieData={movie} /> 
+                                </Col>
+                                //add logout button <button onClick={() => {this.onLoggedOut()}}>Logout</button>
+                            ))
+                            
+                        }} />
+
+                        <Route path="/register" render = {() => {
+                            if(user) return <Redirect to="/" />
+
+                            return
+                            <RegisterView />
+                        }} />
+
+                        <Route path="/movies/:title" render = {({ match, history }) => {
+
+                            return <Col md={8}>
+                                <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} />
+                                <button onClick={() => {this.onLoggedOut()}}>Logout</button>
+                            </Col>
+                        }} /> 
+                    
+                </Row>
+            </Router>
+        );  
+    }
+    
+    getMovies(token){
+
+        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
+            headers : { Authorization : 'Bearer ' + token  }
+        })*/
+        Axios.get('http://localhost:8080/movies', {
+            headers : { Authorization : `Bearer ${token}`  }
+        })
         .then(response => {
+            
+            let movieData = response.data;
+            let imageSRC = 'http://localhost:8080';        
+
+            movieData.map((movie) => {
+                movie.imagePath = imageSRC + movie.imagePath;
+            });
+
             //console.log(response.data);
+            //console.log(movieData); //after modified image path
+            
             this.setState({
                 movies: response.data
             });
@@ -88,6 +116,18 @@ export class MainView extends React.Component{
         .catch(error => {
             console.log(error);
         });
+
+    }
+
+    componentDidMount(){
+        let accessToken = localStorage.getItem('token');
+
+        if(accessToken !==null){
+            this.setState({
+                user: localStorage.getItem('user')
+            });
+            this.getMovies(accessToken);
+        }
     }
 
 }
