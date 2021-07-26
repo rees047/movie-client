@@ -2,30 +2,32 @@
 
 
 
+html body {
+  background-color: #3d147b;
+}
+
 #CineFiles-Client {
-  color: #2D93AD;
-  font-family: "Courier New", Courier, monospace;
+  font-family: "Space Mono", monospace;
+  color: #ffa5d2;
+  letter-spacing: 0.5em;
 }
 
-.custom-button {
-  background-color: #2D93AD !important;
-  border-color: #2D93AD !important;
+.btn-flat {
+  background-color: #fd00fe !important;
+  color: #eeeeee !important;
 }
 
-.custom-button:hover {
-  background-color: #42A5BE !important;
-  border-color: #42A5BE !important;
+.btn-flat:hover {
+  background-color: #ffa5d2 !important;
+  color: #3d147b !important;
+  text-decoration: none !important;
 }
 
-.label {
-  font-weight: bold;
+.has-height-600 {
+  height: 600px;
 }
 
-.movie-details-container {
-  padding: 0.25em;
-}
-
-.movie-card span.label, .cursor-pointer {
-  cursor: pointer;
+.logo-image {
+  height: 300px;
 }
 /*# sourceMappingURL=index.1d334ea1.css.map */

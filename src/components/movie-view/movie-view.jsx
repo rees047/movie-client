@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 
 import  './movie-view.scss';
 
@@ -23,7 +25,7 @@ export class MovieView extends React.Component{
         return (
             <div className="movie-view movie-details-container">
                 <div className="movie-image">
-                    <img src={movieData.imagePath} width="200" height="300" />
+                    <Image src={movieData.imagePath} width="200" height="300" crossOrigin="anonymous" />
                 </div>
                 <div className="movie-title movie-details-container">
                     <span className="label">Title: </span>
@@ -57,7 +59,7 @@ export class MovieView extends React.Component{
 
 }
 
-MovieView.propTypes = {
+/*MovieView.propTypes = {
     movieData: PropTypes.shape({
         title: PropTypes.string.isRequired,
         description: PropTypes.string,
@@ -84,4 +86,4 @@ MovieView.propTypes = {
         runtime: PropTypes.string,
         year: PropTypes.string
     }).isRequired
-}
+}*/

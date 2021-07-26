@@ -1,52 +1,76 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 import PropTypes from 'prop-types';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+
+import { Row, Col, Form, Button, Image} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 
 import  './login-view.scss';
-
+import logo from '../../images/cinema-pink.png';
 
 export function LoginView(props){
-    
+
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        /* 
-            Send a request to the server for authentication
-            then call this.props.onLoggedIn(username)
-        */
-        props.onLoggedIn(username);        
+
+        //Send a request to the server for authentication
+        //Axios.post('https://cinefiles-api.herokuapp.com/login', {
+        Axios.post('http://localhost:8080/login', {
+            username: username,
+            password: password
+        }).then(response => {
+            const data = response.data;
+            props.onLoggedIn(data);  
+        }).catch (e => {
+            console.log('no such user');
+        });
+
+        //console.log(username, password);
+              
     };
 
     return (
-        <Row id="login" className="justify-content-md-center">
-            <Col className="border" md={8}>
-                <Form>
-                    <Form.Group controlId = "formGroupUsername">
-                        <Form.Label>Username:</Form.Label>
-                        <Form.Control type="text" value={username} name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group controlId = "formGroupPassword">
-                        <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" value={password} name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
-                    </Form.Group>
-                    <Button className="custom-button" type="button" onClick={handleSubmit}>Submit</Button>
-                </Form>
-                <Row>
-                    <Col md={8}>
-                        <br/>
-                        <Button className="custom-button" type="button" onClick={() => { props.onRegisterClick(true); }}>Register</Button>
-                    </Col>
-                </Row>
-            </Col>
-        </Row>
+       
+       <Col id="login" md={8}>
+           <Row className="align-items-center has-height-600">
+               <Col fluid><Row>
+               <Col md={5}>
+                   <Image src={logo} rounded alt="Cinema-Files-Logo" className="logo-image" />
+               </Col>
+               <Col md={7}>
+                    <Row>
+                        <Col>
+                            <Form>
+                                <Form.Group controlId = "formGroupUsername">
+                                    <Form.Label>Username:</Form.Label>
+                                    <Form.Control type="text" value={username} name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                                </Form.Group>
+                                <Form.Group controlId = "formGroupPassword">
+                                    <Form.Label>Password:</Form.Label>
+                                    <Form.Control type="password" value={password} name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                                </Form.Group>
+                            </Form>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={4}>
+                            <Button variant="flat" onClick={handleSubmit}>Submit</Button>
+                        </Col>
+                        <Col md={4}>
+                            <Link to="/register">
+                                 <Button variant="link" className="btn-flat">Register</Button>
+                            </Link>
+                        </Col>
+                    </Row>
+               </Col></Row>
+               </Col>
+            </Row>
+        </Col>
+   
     );
-
 }
 
 LoginView.propTypes = {

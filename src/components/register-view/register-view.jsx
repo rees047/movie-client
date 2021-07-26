@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 import PropTypes from 'prop-types';
+
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -19,7 +21,26 @@ export function RegisterView(props){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password, firstName, lastName, email, birthDate);    
+        
+        //Send a request to the server for authentication
+        //Axios.post('https://cinefiles-api.herokuapp.com/users', {
+            Axios.post('http://localhost:8080/users', {
+                username: username,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                birthdate: birthdate
+            }).then(response => {
+                const data = response.data;
+                console.log(data);
+                window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in the current tab
+            }).catch (e => {
+                console.log('error registering the user');
+            });
+    
+            //console.log(username, password);
+        
     };
 
     return (

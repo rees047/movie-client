@@ -1,32 +1,39 @@
-$green: #2D93AD;
-$yellow: #FEFFE4; //FEFFE4
-$font: 'Courier New', Courier, monospace;
+$darkPurple: #3d147b;
+$brightPurple: #fd00fe;
+
+$darkPink: #ff7ea7;
+$brightPink: #ffa5d2 ;
+
+$white: #ffffff;
+$lightgrey: #eeeeee;
+
+$font: 'Space Mono', monospace;
+
+html body{
+    background-color: $darkPurple;
+}
 
 #CineFiles-Client{
-    color: $green;
     font-family: $font;
+    color: $brightPink;
+    letter-spacing: 0.5em;
 }
 
-
-.custom-button{
-    background-color: $green !important;
-    border-color: $green !important;
+.btn-flat {
+    background-color: $brightPurple !important;
+    color: $lightgrey !important;
 }
 
-.custom-button:hover{
-    background-color: #42A5BE !important;
-    border-color: #42A5BE !important;
-   
+.btn-flat:hover {
+    background-color: $brightPink !important;
+    color: $darkPurple !important;
+    text-decoration: none !important;
 }
 
-.label{
-    font-weight: bold;
+.has-height-600{
+    height: 600px;
 }
 
-.movie-details-container{
-    padding: 0.25em;
-}
-
-.movie-card span.label, .cursor-pointer{
-    cursor: pointer;
+.logo-image{
+    height: 300px;
 }
