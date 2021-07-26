@@ -47,6 +47,7 @@ html body{
     text-align: center;
     text-transform: uppercase;
     color: $white;
+    text-shadow: -1px -1px 0 $brightPink, 1px -1px 0 brightPink, -1px 1px 0 brightPink, 1px 1px 0 brightPink;
     font-size: 1.5em;
     padding: .25em;
 }

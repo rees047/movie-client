@@ -15,8 +15,7 @@ export function LoginView(props){
     const [errMsg, setErrMsg] = useState();
     
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrMsg('');
+        e.preventDefault();        
 
         if(!username || !password){
             setErrMsg('Missing Credentials');
