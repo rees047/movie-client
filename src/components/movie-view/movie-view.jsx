@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
+import {Link} from 'react-router-dom';
+
 import  './movie-view.scss';
 
 export class MovieView extends React.Component{
@@ -21,7 +23,7 @@ export class MovieView extends React.Component{
     }
 
     render(){
-        const {movieData, onBackClick } = this.props;
+        const {movieData, onBackClick, onLoggedOut } = this.props;
         return (
             <div className="movie-view movie-details-container">
                 <div className="movie-image">
@@ -53,6 +55,9 @@ export class MovieView extends React.Component{
                 </div>     
                 <br/>
                 <Button className="custom-button" type="button" onClick={() => { onBackClick(null); }}>Back</Button>
+                <Link to="/">
+                            <Button variant="link" className="btn-flat" onClick={() => {onLoggedOut()}}>Logout</Button>
+                        </Link>
             </div>
         );
     }

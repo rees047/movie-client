@@ -32,22 +32,55 @@ html body{
 
 .has-height-600{
     height: 600px;
-    margin-top: 20%;
+    margin-top: 5%;
 }
 
-.logo-image{
+#login .logo-image{
     height: 300px;
 }
 
-#register img{
+#login .error-msg{
+    font-size: 1.5em;
+    padding: .25em;
+    letter-spacing: normal;
+}
+
+#register .logo-image{
     height: 200px;
+}
+
+#register .text-muted{
+    color: $lightgrey !important;
+    letter-spacing: normal;
+}
+
+#register .error-msg{
+    font-size: 1em;
+    letter-spacing: normal;
+    list-style: none;
 }
 
 .error-msg{
     text-align: center;
     text-transform: uppercase;
-    color: $white;
-    text-shadow: -1px -1px 0 $brightPink, 1px -1px 0 brightPink, -1px 1px 0 brightPink, 1px 1px 0 brightPink;
-    font-size: 1.5em;
-    padding: .25em;
+    color: $white;   
+}
+
+#movieCard img.card-img-top{
+    object-fit: cover;
+    height: 380px;
+}
+
+#movieCard .card-text{
+    letter-spacing: normal;
+    font-size: .85em;
+}
+
+#movieCard .card-title{
+    letter-spacing: normal;
+}
+
+#movieCard .card{
+    margin-top: 15px;
+    margin-bottom: 15px;
 }

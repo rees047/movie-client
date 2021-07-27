@@ -22,29 +22,36 @@ export function RegisterView(props){
     const [ lastName, setLastName ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ birthDate, setBirthDate ] = useState('');
+    const [ msgObjArray, setMsgObjArray ] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
-        //Send a request to the server for authentication
-        //Axios.post('https://cinefiles-api.herokuapp.com/users', {
-            Axios.post('http://localhost:8080/users', {
+
+        if(!username || !password || !email || !firstName || !lastName){
+            setMsgObjArray([{ msg : 'Please fill out all fields'}]);
+        }else{
+            //Send a request to the server for authentication
+            //Axios.post('https://cinefiles-api.herokuapp.com/users', {
+            Axios.post('http://localhost:8080/register', {
                 username: username,
                 password: password,
-                firstname: firstname,
-                lastname: lastname,
+                firstname: firstName,
+                lastname: lastName,
                 email: email,
-                birthdate: birthdate
+                birthdate: birthDate
             }).then(response => {
-                const data = response.data;
-                console.log(data);
-                window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in the current tab
+                //const data = response.data;
+                //console.log(data);
+                setMsgObjArray(response.data.serverResponse);
+                //window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in the current tab
             }).catch (e => {
-                console.log('error registering the user');
+                //console.log(e.response.data.errors);
+                setMsgObjArray(e.response.data.serverResponse);
+                //console.log('error registering the user');
             });
-    
-            //console.log(username, password);
+        }
         
+        //console.log(username, password);        
     };
 
     return (
@@ -56,15 +63,36 @@ export function RegisterView(props){
                             <Image src={logo} rounded alt="Cinema-Files-Logo" className="logo-image" />
                         </Col>
                     </Row>
+                    <Row>
+                        <Col>
+                            <h2 className="text-center">CineFiles</h2>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <br />
+                            <ul>
+                            {
+                                msgObjArray.map((serverMsg, index) => 
+                                    <li key={index} className="error-msg">{serverMsg.msg}</li>
+                                )
+                            }
+                            </ul>                    
+                        </Col>
+                    </Row>
                     <Form>
                     <Row>
                         <Form.Group controlId = "formGroupUsername" as={Col}>
                             <Form.Label>Username:</Form.Label>
                             <Form.Control type="text" value={username} name="username" placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
+                            <Form.Text className="text-muted">Must be more than 5 characters.</Form.Text>
+                            <Form.Text className="text-muted">Letters and Numbers Only</Form.Text>
                         </Form.Group>
                         <Form.Group controlId = "formGroupPassword" as={Col}>
                             <Form.Label>Password:</Form.Label>
                             <Form.Control type="password" value={password} name="password" placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
+                            <Form.Text className="text-muted">Must be more than 5 characters.</Form.Text>
+                            <Form.Text className="text-muted">Letters and Numbers Only</Form.Text>
                         </Form.Group>
                     </Row>
                     <Row>

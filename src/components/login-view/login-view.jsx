@@ -39,7 +39,7 @@ export function LoginView(props){
 
     return (
        
-       <Col id="login" md={8}>
+        <Col id="login" md={8}>
             <Row className="align-items-center has-height-600">
                 <Col fluid="true">
                     <Row>

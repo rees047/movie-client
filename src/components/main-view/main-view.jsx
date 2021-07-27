@@ -22,6 +22,7 @@ export class MainView extends React.Component{
             selectedMovie: null,
             user: null
         }
+        this.onLoggedOut = this.onLoggedOut.bind(this);
     }    
 
     /* when a user successfully logs in, this function updates the 'user' property in state to that *particular* user */
@@ -45,20 +46,17 @@ export class MainView extends React.Component{
     }
 
     render(){
-        const {movies, user} = this.state;  
-
+        const {movies, user} = this.state;         
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render = {() => {
-                            if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
 
-                            if (movies.length === 0) return <div className="main-view"></div>
+                            if (!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
 
-                            return movies.map(movie => (
-                                <MovieCard key={movie._id} movieData={movie} /> 
-                                //add logout button <button onClick={() => {this.onLoggedOut()}}>Logout</button>
-                            ))
+                            if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
+
+                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} />
                             
                         }} />
 
@@ -68,11 +66,11 @@ export class MainView extends React.Component{
                         }} />
 
                         <Route path="/movies/:title" render = {({ match, history }) => {
+                            if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
 
-                            return <Col md={8}>
-                                <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} />
-                                <button onClick={() => {this.onLoggedOut()}}>Logout</button>
-                            </Col>
+                            return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} />
+                                { /*<button onClick={() => {this.onLoggedOut()}}>Logout</button> */}
+                            
                         }} /> 
                     
                 </Row>
