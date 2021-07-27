@@ -15,6 +15,16 @@ import {NavBarView} from '../navbar-view/navbar-view';
 
 export class MovieCard extends React.Component{
 
+    componentDidMount(){
+        let accessToken = localStorage.getItem('token');
+        console.log(accessToken);
+
+        if(accessToken == null){
+            console.log('here');
+            return <Redirect to="/" /> 
+        }
+    }
+
     truncate (str) {
         return str.length > 100 ? str.substring(0, 100) + "..." : str;
     }

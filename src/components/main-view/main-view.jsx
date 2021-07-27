@@ -71,26 +71,33 @@ export class MainView extends React.Component{
         
         return (
             <Router>
-                <Switch>
-                <Row className="main-view justify-content-md-center">
-                        <Route exact path="/" render = {() => {
-                            if (!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
-                            if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
-                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} userName={user} userID={userID} />
-                        }} />
+                 <Row className="main-view justify-content-md-center">
 
+                <Switch>
+               
                         <Route path="/register" render = {() => {
                             if(user) return <Redirect to="/" />
                             return <RegisterView />
                         }} />
 
                         <Route path="/movies/:title" render = {({ match, history }) => {
-                            if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
+                            if(!user) return <Redirect to="/" />
                             return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} />
                         }} /> 
-                    
+
+                        <Route path="/movies" render ={() => {
+                            if(!user) return <Redirect to="/" />
+                            if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
+                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} userName={user} userID={userID} />
+                        }} />
+
+                        <Route exact path="/" render = {() => {
+                            if (user) return <Redirect to="/movies" />
+                            return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
+                        }} />
+                    </Switch>
                 </Row>
-                </Switch>
+                
             </Router>
         );  
     }
