@@ -5,10 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Navbar from 'react-bootstrap/Navbar';
-import Container from 'react-bootstrap/Container';
 
+import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import {Link} from 'react-router-dom';
+
+import {NavBarView} from '../navbar-view/navbar-view';
+
+
 
 export class MovieCard extends React.Component{
 
@@ -17,7 +20,7 @@ export class MovieCard extends React.Component{
     }
 
     render(){
-        const { movieData, onLoggedOut } = this.props;
+        const { movieData, onLoggedOut, userName, userID } = this.props;
 
         //convert your array to a matrix as per your need
         const movieRows = movieData.reduce(function (rows, key, index) { 
@@ -26,21 +29,13 @@ export class MovieCard extends React.Component{
           }, []);
           
         //console.log(movieRows)
+
+        
        
         return (
             <Col id="movieCard">
-                                <Navbar>
-  <Container>
-    <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
-    <Navbar.Toggle />
-    <Navbar.Collapse className="justify-content-end">
-      <Navbar.Text>
-        Signed in as: <a href="#login">Mark Otto</a>
-      </Navbar.Text>
-    </Navbar.Collapse>
-  </Container>
-</Navbar>
-                { movieRows.map(movieRow => (
+                    <NavBarView />
+                    { movieRows.map(movieRow => (
                     <Row>
                         { movieRow.map(movieColData => (
                             <Col lg={3} className="d-flex align-items-normal" key={movieColData._id}>
@@ -74,8 +69,8 @@ export class MovieCard extends React.Component{
 
 }
 
-MovieCard.propTypes = {
+/*MovieCard.propTypes = {
     movieData: PropTypes.shape({
       movies: PropTypes.arrayOf(PropTypes.string)
     })
-  };
+};*/

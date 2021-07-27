@@ -1,7 +1,7 @@
 import React from 'react';
 import Axios from 'axios';
 
-import {BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
@@ -20,44 +20,63 @@ export class MainView extends React.Component{
         this.state = { //initial state is set to null
             movies : [],
             selectedMovie: null,
-            user: null
+            user: null,
+            userID: null
         }
         this.onLoggedOut = this.onLoggedOut.bind(this);
     }    
+
+    componentDidMount(){       
+        let accessToken = localStorage.getItem('token');
+
+        if(accessToken !==null){
+            this.setState({
+                user: localStorage.getItem('user'),
+                userID: localStorage.getItem('uid')
+            });
+            this.getMovies(accessToken);
+        }else{
+            this.setState({
+                user: null,
+                userID: null
+            });
+        }
+    }
 
     /* when a user successfully logs in, this function updates the 'user' property in state to that *particular* user */
     onLoggedIn(authData){
         //console.log(authData);
         this.setState({
-            user: authData.user.username
+            user: authData.user.username,
+            userID: authData.user._id
         });
 
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.username);
+        localStorage.setItem('uid', authData.user._id);
         this.getMovies(authData.token)
     }
 
     onLoggedOut(){
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('uid');
         this.setState({
             user: null
         });
     }
 
     render(){
-        const {movies, user} = this.state;         
+        const {movies, user, userID} = this.state;   
+        
         return (
             <Router>
+                <Switch>
                 <Row className="main-view justify-content-md-center">
                         <Route exact path="/" render = {() => {
-
                             if (!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
-
                             if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
-
-                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} />
-                            
+                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} userName={user} userID={userID} />
                         }} />
 
                         <Route path="/register" render = {() => {
@@ -67,13 +86,11 @@ export class MainView extends React.Component{
 
                         <Route path="/movies/:title" render = {({ match, history }) => {
                             if(!user) return <LoginView onLoggedIn={newUser => this.onLoggedIn(newUser)} />
-
                             return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} />
-                                { /*<button onClick={() => {this.onLoggedOut()}}>Logout</button> */}
-                            
                         }} /> 
                     
                 </Row>
+                </Switch>
             </Router>
         );  
     }
@@ -106,17 +123,6 @@ export class MainView extends React.Component{
             console.log(error);
         });
 
-    }
-
-    componentDidMount(){
-        let accessToken = localStorage.getItem('token');
-
-        if(accessToken !==null){
-            this.setState({
-                user: localStorage.getItem('user')
-            });
-            this.getMovies(accessToken);
-        }
     }
 
 }
