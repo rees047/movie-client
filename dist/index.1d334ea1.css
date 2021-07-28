@@ -48,7 +48,9 @@
 }
 
 
-
+#user-info .error-msg {
+  color: #3d147b;
+}
 
 html body {
   background-color: #3d147b;
