@@ -23100,7 +23100,8 @@ class MainView extends _reactDefault.default.Component {
             headers : { Authorization : `Bearer ${token}`  }
         })*/ .then((response)=>{
             let movieData = response.data;
-            let imageSRC = 'http://localhost:8080';
+            let imageSRC = 'https://cinefiles-api.herokuapp.com/';
+            //let imageSRC = 'http://localhost:8080';        
             movieData.map((movie)=>{
                 movie.imagePath = imageSRC + movie.imagePath;
             });
