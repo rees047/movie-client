@@ -21,6 +21,7 @@ export class UserView extends React.Component{
             hasFaveMovies: false,
             f_name: '',
             l_name: '',
+            errMsg: '',
         };
     }
     
@@ -85,6 +86,7 @@ export class UserView extends React.Component{
                 //alert('Movie Added!');           
         })
         .catch(error => {
+            this.setState({errMsg : error.msg});
             console.log(error);
         });
 
@@ -94,32 +96,37 @@ export class UserView extends React.Component{
         let token =  this.AccessToken();
         let fname = this.state.f_name;
         let lname = this.state.l_name;
-        
-        Axios({
-            method: 'put',
-            //url: `http://localhost:8080/users/${this.state.userData.username}`,
-            url: `https://cinefiles-api.herokuapp.com/users/${this.state.userData.username}`,
-            data: {},
-            params : {
-                firstname : fname,
-                lastname: lname,
-            },
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-        }).then(response => {
-            //console.log(response);
-            /*this.setState({ userData: response.data });
-            this.setState({ isLoading: false });
 
-            if(response.data.favoredMovies != 0)
-                this.setState({ hasFaveMovies: true });*/
-           // if(response.data.success)
-                //alert('Movie Added!');           
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        if(!fname || !lname){
+            this.setState({errMsg : 'Please fill out all fields'});
+        }else{
+            Axios({
+                method: 'put',
+                //url: `http://localhost:8080/users/${this.state.userData.username}`,
+                url: `https://cinefiles-api.herokuapp.com/users/${this.state.userData.username}`,
+                data: {},
+                params : {
+                    firstname : fname,
+                    lastname: lname,
+                },
+                headers: {
+                Authorization: `Bearer ${token}`
+                }
+            }).then(response => {
+                alert('Profile Updated');
+                //console.log(response);
+                /*this.setState({ userData: response.data });
+                this.setState({ isLoading: false });
+
+                if(response.data.favoredMovies != 0)
+                    this.setState({ hasFaveMovies: true });*/
+            // if(response.data.success)
+                    //alert('Movie Added!');           
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
 
        
     }
@@ -172,7 +179,7 @@ export class UserView extends React.Component{
     render(){
         
         const { onLoggedOut, user, userID } = this.props;    
-        const { isLoading, userData, f_name, l_name } = this.state;       
+        const { isLoading, userData, f_name, l_name, errMsg } = this.state;       
 
         if (isLoading) {
           return <div className="App">Loading...</div>;
@@ -189,6 +196,11 @@ export class UserView extends React.Component{
                                 <Col>
                                     <Row className="details-container">
                                         <Col><h2 className="title">{userData.username}</h2></Col>
+                                    </Row>
+                                    <Row className="details-container">
+                                        <Col offset={4} className="text-center">
+                                            <p className="error-msg">{errMsg}<br/></p>
+                                        </Col>
                                     </Row>
                                     <Form>
                                         <Form.Group controlId = "formGroupFirstName" as={Row}>
