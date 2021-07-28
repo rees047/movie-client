@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
-import Alert from 'react-bootstrap/Alert';
 
 import {Link} from 'react-router-dom';
 
@@ -40,13 +39,11 @@ export class MovieView extends React.Component{
     }
 
     updateFavoriteMovies(token){
-
-        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
-            headers : { Authorization : 'Bearer ' + token  }
-        })*/
+        
         Axios({
             method: 'post',
-            url: `http://localhost:8080/users/${this.props.user}/movies/${this.props.movieData.title}`,
+            //url: `http://localhost:8080/users/${this.props.user}/movies/${this.props.movieData.title}`,
+            url: `https://cinefiles-api.herokuapp.com/users/${this.props.user}/movies/${this.props.movieData.title}`,
             headers: {
               Authorization: `Bearer ${token}`
             }

@@ -31,8 +31,8 @@ export function RegisterView(props){
             setMsgObjArray([{ msg : 'Please fill out all fields'}]);
         }else{
             //Send a request to the server for authentication
-            //Axios.post('https://cinefiles-api.herokuapp.com/users', {
-            Axios.post('http://localhost:8080/register', {
+            Axios.post('https://cinefiles-api.herokuapp.com/registers', {
+            //Axios.post('http://localhost:8080/register', {
                 username: username,
                 password: password,
                 firstname: firstName,

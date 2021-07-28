@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
-//import  './navbar-view.scss';
+import  './navbar-view.scss';
 import logo from '../../images/cinema-pink.png';
 
 export class NavBarView extends React.Component{

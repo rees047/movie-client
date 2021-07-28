@@ -15,14 +15,15 @@ export function LoginView(props){
     const [errMsg, setErrMsg] = useState();
     
     const handleSubmit = (e) => {
-        e.preventDefault();        
+        e.preventDefault();
+        setErrMsg('');  
 
         if(!username || !password){
             setErrMsg('Missing Credentials');
         }else{
             //Send a request to the server for authentication
-            //Axios.post('https://cinefiles-api.herokuapp.com/login', {
-            Axios.post('http://localhost:8080/login', {
+            Axios.post('https://cinefiles-api.herokuapp.com/login', {
+            //Axios.post('http://localhost:8080/login', {
                 username: username,
                 password: password
             }).then(response => {
@@ -54,7 +55,7 @@ export function LoginView(props){
                             </Row>
                             <Row>
                                 <Col>
-                                    <p className="error-msg">{errMsg}</p>
+                                    <p className="error-msg">&nbsp; {errMsg}</p>
                                 </Col>
                             </Row>
                             <Row>

@@ -123,12 +123,12 @@ export class MainView extends React.Component{
     
     getMovies(token){
 
-        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
+        Axios.get('https://cinefiles-api.herokuapp.com/movies',{
             headers : { Authorization : 'Bearer ' + token  }
-        })*/
-        Axios.get('http://localhost:8080/movies', {
-            headers : { Authorization : `Bearer ${token}`  }
         })
+        /*Axios.get('http://localhost:8080/movies', {
+            headers : { Authorization : `Bearer ${token}`  }
+        })*/
         .then(response => {
             
             let movieData = response.data;

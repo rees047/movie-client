@@ -1,14 +1,12 @@
 import React from 'react';
 import Axios from 'axios';
-import PropTypes from 'prop-types';
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
 
-import {Link} from 'react-router-dom';
 import {NavBarView} from '../navbar-view/navbar-view';
 
 import  './user-view.scss';
@@ -17,56 +15,63 @@ export class UserView extends React.Component{
 
     constructor(props) {
         super(props);
-        this.state = { isLoading: true, userData: undefined, hasFaveMovies: false, editing: false };
-        this.firstname = '';
-        this.lastname = '';
+        this.state = {
+            isLoading: true,
+            userData: undefined,
+            hasFaveMovies: false,
+            f_name: '',
+            l_name: '',
+        };
     }
     
     componentDidMount() {
-        let accessToken = localStorage.getItem('token');
+        let token =  this.AccessToken();
         
         //console.debug("After mount! Let's load data from API...");
-            /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
-            headers : { Authorization : 'Bearer ' + token  }
-        })*/
         Axios({
             method: 'get',
-            url: `http://localhost:8080/users/${this.props.user}`,
+            //url: `http://localhost:8080/users/${this.props.user}`,
+            url: `https://cinefiles-api.herokuapp.com/users/${this.props.user}`,
             headers: {
-                Authorization: `Bearer ${accessToken}`
+                Authorization: `Bearer ${token}`
             }
         })
-        .then(response => {
+        .then(response => {            
             //console.log(response.data);
             this.setState({ userData: response.data });
             this.setState({ isLoading: false });
+            this.setState({ f_name: response.data.firstname });
+            this.setState({ l_name: response.data.lastname });
 
             if(response.data.favoredMovies != 0)
-                this.setState({ hasFaveMovies: true });
+                this.setState({ hasFaveMovies: true }); 
         })
         .catch(error => {
             console.log(error);
         });
     }
 
-    handleClick(movie) {
+    AccessToken(){
         let accessToken = localStorage.getItem('token');
+        return accessToken;
+    }
 
-        if(!accessToken) return
+    handleClick(movie) {
+        let token =  this.AccessToken();
+
+        if(!token) return
         else {
-            this.updateFavoriteMovies(accessToken, movie);
+            this.updateFavoriteMovies(token, movie);
         }
       
     }
 
     updateFavoriteMovies(token, movie){
 
-        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
-            headers : { Authorization : 'Bearer ' + token  }
-        })*/
         Axios({
             method: 'delete',
-            url: `http://localhost:8080/users/${this.state.userData.username}/movies/${movie}`,
+            //url: `http://localhost:8080/users/${this.state.userData.username}/movies/${movie}`,
+            url: `https://cinefiles-api.herokuapp.com/users/${this.state.userData.username}/movies/${movie}`,
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -77,12 +82,46 @@ export class UserView extends React.Component{
             if(response.data.favoredMovies != 0)
                 this.setState({ hasFaveMovies: true });
            // if(response.data.success)
-                //alert('Movie Added!');
+                //alert('Movie Added!');           
         })
         .catch(error => {
             console.log(error);
         });
 
+    }
+    
+    updateProfile(){
+        let token =  this.AccessToken();
+        let fname = this.state.f_name;
+        let lname = this.state.l_name;
+        
+        Axios({
+            method: 'put',
+            //url: `http://localhost:8080/users/${this.state.userData.username}`,
+            url: `https://cinefiles-api.herokuapp.com/users/${this.state.userData.username}`,
+            data: {},
+            params : {
+                firstname : fname,
+                lastname: lname,
+            },
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+        }).then(response => {
+            //console.log(response);
+            /*this.setState({ userData: response.data });
+            this.setState({ isLoading: false });
+
+            if(response.data.favoredMovies != 0)
+                this.setState({ hasFaveMovies: true });*/
+           // if(response.data.success)
+                //alert('Movie Added!');           
+        })
+        .catch(error => {
+            console.log(error);
+        });
+
+       
     }
 
     DeleteProfile(){
@@ -90,7 +129,8 @@ export class UserView extends React.Component{
 
         Axios({
             method: 'delete',
-            url: `http://localhost:8080/users/${this.state.userData.username}`,
+            //url: `http://localhost:8080/users/${this.state.userData.username}`,
+            url: `https://cinefiles-api.herokuapp.com/users/${this.state.userData.username}`,
             headers: {
               Authorization: `Bearer ${token}`
             }
@@ -101,14 +141,6 @@ export class UserView extends React.Component{
         .catch(error => {
             console.log(error);
         });
-    }
-
-    saveEdit(){
-        let token = localStorage.getItem('token');
-
-       console.log(this.firstname);
-
-       
     }
 
     truncate (str) {
@@ -140,13 +172,11 @@ export class UserView extends React.Component{
     render(){
         
         const { onLoggedOut, user, userID } = this.props;    
-        const { isLoading, userData } = this.state;       
+        const { isLoading, userData, f_name, l_name } = this.state;       
 
         if (isLoading) {
           return <div className="App">Loading...</div>;
         }
-
-        console.log(userData);
 
         return (
             <Col id="userView">
@@ -160,24 +190,26 @@ export class UserView extends React.Component{
                                     <Row className="details-container">
                                         <Col><h2 className="title">{userData.username}</h2></Col>
                                     </Row>
+                                    <Form>
+                                        <Form.Group controlId = "formGroupFirstName" as={Row}>
+                                            <Col lg={4}><Form.Label>First Name:</Form.Label></Col>
+                                            <Col lg={4}>
+                                                <Form.Control type="text" defaultValue={userData.firstname} name="firstname" placeholder="John" minLength="5" maxLength="20" onChange={(e) => this.setState({f_name: e.target.value})}  />
+                                            </Col>
+                                        </Form.Group>
+                                        <Form.Group controlId = "formGroupLastName" as={Row}>
+                                            <Col lg={4}><Form.Label>Last Name:</Form.Label></Col>
+                                            <Col lg={4}>
+                                                <Form.Control type="text" defaultValue={userData.lastname} name="lastname" placeholder="Doe" minLength="5" maxLength="20" onChange={(e) => this.setState({l_name: e.target.value})}  />
+                                            </Col>
+                                        </Form.Group>
+                                    </Form>
                                     <Row className="details-container">
-                                        <Col lg={4}> First Name:</Col>
-                                        <Col className="details">
-                                            { this.state.editing ?
-                                                userData.firstname
-                                            :   (
-                                                    <input type="text" defaultValue={userData.firstname} ref={node => { this.firstname = node;  }} />
-                                                )
-                                            }
-                                        </Col>
-                                         <Col className="details">
-                                            <Button variant="flat" onClick={() => this.saveEdit()} >Save</Button>
+                                        <Col offset={4} className="text-center">
+                                            <Button variant="flat" onClick={() => this.updateProfile()} > Update Profile</Button>
                                         </Col>
                                     </Row>
-                                    <Row className="details-container">
-                                        <Col lg={4}> Last Name </Col>
-                                        <Col className="details">{ userData.lastname }</Col>
-                                    </Row>
+                                    <br/>
                                     <Row className="details-container">
                                         <Col lg={4}>Email Address:</Col>
                                         <Col className="details">{ userData.email }</Col>

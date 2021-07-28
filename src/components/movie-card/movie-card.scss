@@ -1,0 +1,18 @@
+#movieCard img.card-img-top{
+    object-fit: cover;
+    height: 380px;
+}
+
+#movieCard .card-text{
+    letter-spacing: normal;
+    font-size: .85em;
+}
+
+#movieCard .card-title{
+    letter-spacing: normal;
+}
+
+#movieCard .card{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

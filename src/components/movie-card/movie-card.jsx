@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 import {Link} from 'react-router-dom';
 
 import {NavBarView} from '../navbar-view/navbar-view';
+import  './movie-card.scss';
 
 export class MovieCard extends React.Component{
 

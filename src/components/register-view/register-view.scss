@@ -1,0 +1,16 @@
+$lightgrey: #eeeeee;
+
+#register .logo-image{
+    height: 200px;
+}
+
+#register .text-muted{
+    color: $lightgrey !important;
+    letter-spacing: normal;
+}
+
+#register .error-msg{
+    font-size: 1em;
+    letter-spacing: normal;
+    list-style: none;
+}
