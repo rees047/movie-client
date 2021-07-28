@@ -10,6 +10,9 @@ import {LoginView} from '../login-view/login-view';
 import {RegisterView} from '../register-view/register-view';
 import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
+import {DirectorView} from '../director-view/director-view';
+import {GenreView} from '../genre-view/genre-view';
+import {UserView} from '../user-view/user-view';
 
 import  './main-view.scss';
 
@@ -27,6 +30,7 @@ export class MainView extends React.Component{
     }    
 
     componentDidMount(){       
+       
         let accessToken = localStorage.getItem('token');
 
         if(accessToken !==null){
@@ -71,7 +75,7 @@ export class MainView extends React.Component{
         
         return (
             <Router>
-                 <Row className="main-view justify-content-md-center">
+                <Row className="main-view justify-content-md-center">
 
                 <Switch>
                
@@ -80,15 +84,30 @@ export class MainView extends React.Component{
                             return <RegisterView />
                         }} />
 
+                        <Route path="/users/:username" render = {({ match, history }) => {
+                            if(!user) return <Redirect to="/" />
+                            return <UserView onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
+                        }} /> 
+
+                        <Route path="/directors/:director" render = {({ match, history }) => {
+                            if(!user) return <Redirect to="/" />
+                            return <DirectorView movieData={movies.find(movie => movie.director.name === match.params.director)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
+                        }} /> 
+
+                        <Route path="/genre/:genre" render = {({ match, history }) => {
+                            if(!user) return <Redirect to="/" />
+                            return <GenreView movieData={movies.find(movie => movie.genre.name === match.params.genre)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
+                        }} /> 
+
                         <Route path="/movies/:title" render = {({ match, history }) => {
                             if(!user) return <Redirect to="/" />
-                            return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} />
+                            return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} /> 
 
                         <Route path="/movies" render ={() => {
                             if(!user) return <Redirect to="/" />
                             if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
-                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} userName={user} userID={userID} />
+                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} />
 
                         <Route exact path="/" render = {() => {

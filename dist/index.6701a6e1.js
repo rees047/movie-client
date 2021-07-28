@@ -22874,6 +22874,9 @@ var _loginView = require("../login-view/login-view");
 var _registerView = require("../register-view/register-view");
 var _movieCard = require("../movie-card/movie-card");
 var _movieView = require("../movie-view/movie-view");
+var _directorView = require("../director-view/director-view");
+var _genreView = require("../genre-view/genre-view");
+var _userView = require("../user-view/user-view");
 var _mainViewScss = require("./main-view.scss");
 class MainView extends _reactDefault.default.Component {
     constructor(){
@@ -22923,20 +22926,20 @@ class MainView extends _reactDefault.default.Component {
         return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.BrowserRouter, {
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 73
+                lineNumber: 77
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                 className: "main-view justify-content-md-center",
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 74
+                    lineNumber: 78
                 },
                 __self: this,
                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactRouterDom.Switch, {
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 76
+                        lineNumber: 80
                     },
                     __self: this,
                     children: [
@@ -22951,7 +22954,71 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 78
+                                lineNumber: 82
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "/users/:username",
+                            render: ({ match , history  })=>{
+                                if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    to: "/"
+                                }));
+                                return(/*#__PURE__*/ _jsxRuntime.jsx(_userView.UserView, {
+                                    onBackClick: ()=>history.goBack()
+                                    ,
+                                    onLoggedOut: this.onLoggedOut,
+                                    user: user,
+                                    userID: userID
+                                }));
+                            },
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 87
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "/directors/:director",
+                            render: ({ match , history  })=>{
+                                if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    to: "/"
+                                }));
+                                return(/*#__PURE__*/ _jsxRuntime.jsx(_directorView.DirectorView, {
+                                    movieData: movies.find((movie)=>movie.director.name === match.params.director
+                                    ),
+                                    onBackClick: ()=>history.goBack()
+                                    ,
+                                    onLoggedOut: this.onLoggedOut,
+                                    user: user,
+                                    userID: userID
+                                }));
+                            },
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 92
+                            },
+                            __self: this
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Route, {
+                            path: "/genre/:genre",
+                            render: ({ match , history  })=>{
+                                if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
+                                    to: "/"
+                                }));
+                                return(/*#__PURE__*/ _jsxRuntime.jsx(_genreView.GenreView, {
+                                    movieData: movies.find((movie)=>movie.genre.name === match.params.genre
+                                    ),
+                                    onBackClick: ()=>history.goBack()
+                                    ,
+                                    onLoggedOut: this.onLoggedOut,
+                                    user: user,
+                                    userID: userID
+                                }));
+                            },
+                            __source: {
+                                fileName: "src/components/main-view/main-view.jsx",
+                                lineNumber: 97
                             },
                             __self: this
                         }),
@@ -22966,12 +23033,14 @@ class MainView extends _reactDefault.default.Component {
                                     ),
                                     onBackClick: ()=>history.goBack()
                                     ,
-                                    onLoggedOut: this.onLoggedOut
+                                    onLoggedOut: this.onLoggedOut,
+                                    user: user,
+                                    userID: userID
                                 }));
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 83
+                                lineNumber: 102
                             },
                             __self: this
                         }),
@@ -22990,13 +23059,13 @@ class MainView extends _reactDefault.default.Component {
                                 return(/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
                                     movieData: movies,
                                     onLoggedOut: this.onLoggedOut,
-                                    userName: user,
+                                    user: user,
                                     userID: userID
                                 }));
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 88
+                                lineNumber: 107
                             },
                             __self: this
                         }),
@@ -23013,7 +23082,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 94
+                                lineNumber: 113
                             },
                             __self: this
                         })
@@ -23051,7 +23120,7 @@ class MainView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-router-dom":"cpyQW","react-bootstrap/Row":"c0x1x","../login-view/login-view":"054li","../register-view/register-view":"F9ahz","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","./main-view.scss":"jyMAr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"iYoWk":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","axios":"iYoWk","react-router-dom":"cpyQW","react-bootstrap/Row":"c0x1x","../login-view/login-view":"054li","../register-view/register-view":"F9ahz","../movie-card/movie-card":"6EiBJ","../movie-view/movie-view":"ikZdr","../director-view/director-view":"ck15y","../genre-view/genre-view":"8WCoL","./main-view.scss":"jyMAr","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","../user-view/user-view":"fZtM6"}],"iYoWk":[function(require,module,exports) {
 module.exports = require('./lib/axios');
 
 },{"./lib/axios":"3QmO2"}],"3QmO2":[function(require,module,exports) {
@@ -40056,26 +40125,22 @@ var _cardDefault = parcelHelpers.interopDefault(_card);
 var _reactRouterDom = require("react-router-dom");
 var _navbarView = require("../navbar-view/navbar-view");
 class MovieCard extends _reactDefault.default.Component {
-    componentDidMount() {
-        let accessToken = localStorage.getItem('token');
-        console.log(accessToken);
-        if (accessToken == null) {
-            console.log('here');
-            return(/*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Redirect, {
-                to: "/",
-                __source: {
-                    fileName: "src/components/movie-card/movie-card.jsx",
-                    lineNumber: 24
-                },
-                __self: this
-            }));
-        }
-    }
     truncate(str) {
         return str.length > 100 ? str.substring(0, 100) + "..." : str;
     }
     render() {
-        const { movieData , onLoggedOut , userName , userID  } = this.props;
+        /*const checkAccess = () => {
+            let accessToken = localStorage.getItem('token');
+
+            if(accessToken == null){
+                console.log('here');
+                onLoggedOut();
+                return <Redirect to="/" />
+            }else{
+                return null;
+            }            
+        }*/ //console.log(user);
+        const { movieData , onLoggedOut , user , userID  } = this.props;
         //convert your array to a matrix as per your need
         const movieRows = movieData.reduce(function(rows, key, index) {
             return (index % 4 == 0 ? rows.push([
@@ -40092,16 +40157,19 @@ class MovieCard extends _reactDefault.default.Component {
             __self: this,
             children: [
                 /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavBarView, {
+                    onLoggedOut: onLoggedOut,
+                    user: user,
+                    userID: userID,
                     __source: {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 47
+                        lineNumber: 49
                     },
                     __self: this
                 }),
                 movieRows.map((movieRow)=>/*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                         __source: {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 49
+                            lineNumber: 51
                         },
                         __self: this,
                         children: movieRow.map((movieColData)=>/*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
@@ -40109,13 +40177,13 @@ class MovieCard extends _reactDefault.default.Component {
                                 className: "d-flex align-items-normal",
                                 __source: {
                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 51
+                                    lineNumber: 53
                                 },
                                 __self: this,
                                 children: /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default, {
                                     __source: {
                                         fileName: "src/components/movie-card/movie-card.jsx",
-                                        lineNumber: 52
+                                        lineNumber: 54
                                     },
                                     __self: this,
                                     children: [
@@ -40123,13 +40191,13 @@ class MovieCard extends _reactDefault.default.Component {
                                             className: "text-center font-weight-bold",
                                             __source: {
                                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                                lineNumber: 53
+                                                lineNumber: 55
                                             },
                                             __self: this,
                                             children: movieColData.featured ? "Featured" : /*#__PURE__*/ _jsxRuntime.jsx("br", {
                                                 __source: {
                                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                                    lineNumber: 53
+                                                    lineNumber: 55
                                                 },
                                                 __self: this
                                             })
@@ -40140,21 +40208,21 @@ class MovieCard extends _reactDefault.default.Component {
                                             crossOrigin: "anonymous",
                                             __source: {
                                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                                lineNumber: 54
+                                                lineNumber: 56
                                             },
                                             __self: this
                                         }),
                                         /*#__PURE__*/ _jsxRuntime.jsxs(_cardDefault.default.Body, {
                                             __source: {
                                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                                lineNumber: 55
+                                                lineNumber: 57
                                             },
                                             __self: this,
                                             children: [
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Title, {
                                                     __source: {
                                                         fileName: "src/components/movie-card/movie-card.jsx",
-                                                        lineNumber: 56
+                                                        lineNumber: 58
                                                     },
                                                     __self: this,
                                                     children: movieColData.title
@@ -40162,7 +40230,7 @@ class MovieCard extends _reactDefault.default.Component {
                                                 /*#__PURE__*/ _jsxRuntime.jsx(_cardDefault.default.Text, {
                                                     __source: {
                                                         fileName: "src/components/movie-card/movie-card.jsx",
-                                                        lineNumber: 57
+                                                        lineNumber: 59
                                                     },
                                                     __self: this,
                                                     children: this.truncate(movieColData.description)
@@ -40173,14 +40241,14 @@ class MovieCard extends _reactDefault.default.Component {
                                             className: "text-center",
                                             __source: {
                                                 fileName: "src/components/movie-card/movie-card.jsx",
-                                                lineNumber: 59
+                                                lineNumber: 61
                                             },
                                             __self: this,
                                             children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
                                                 to: `/movies/${movieColData.title}`,
                                                 __source: {
                                                     fileName: "src/components/movie-card/movie-card.jsx",
-                                                    lineNumber: 60
+                                                    lineNumber: 62
                                                 },
                                                 __self: this,
                                                 children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
@@ -40188,7 +40256,7 @@ class MovieCard extends _reactDefault.default.Component {
                                                     className: "btn-flat",
                                                     __source: {
                                                         fileName: "src/components/movie-card/movie-card.jsx",
-                                                        lineNumber: 61
+                                                        lineNumber: 63
                                                     },
                                                     __self: this,
                                                     children: "Open"
@@ -40200,42 +40268,7 @@ class MovieCard extends _reactDefault.default.Component {
                             }, movieColData._id)
                         )
                     })
-                ),
-                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
-                    __source: {
-                        fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 69
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
-                        __source: {
-                            fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 70
-                        },
-                        __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                            to: "/",
-                            __source: {
-                                fileName: "src/components/movie-card/movie-card.jsx",
-                                lineNumber: 71
-                            },
-                            __self: this,
-                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                                variant: "link",
-                                className: "btn-flat",
-                                onClick: ()=>{
-                                    onLoggedOut();
-                                },
-                                __source: {
-                                    fileName: "src/components/movie-card/movie-card.jsx",
-                                    lineNumber: 72
-                                },
-                                __self: this,
-                                children: "Logout"
-                            })
-                        })
-                    })
-                })
+                )
             ]
         }));
     }
@@ -40260,69 +40293,123 @@ parcelHelpers.export(exports, "NavBarView", ()=>NavBarView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _reactRouterDom = require("react-router-dom");
+var _nav = require("react-bootstrap/Nav");
+var _navDefault = parcelHelpers.interopDefault(_nav);
 var _navbar = require("react-bootstrap/Navbar");
 var _navbarDefault = parcelHelpers.interopDefault(_navbar);
 var _container = require("react-bootstrap/Container");
 var _containerDefault = parcelHelpers.interopDefault(_container);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
 //import  './navbar-view.scss';
 var _cinemaPinkPng = require("../../images/cinema-pink.png");
 var _cinemaPinkPngDefault = parcelHelpers.interopDefault(_cinemaPinkPng);
 class NavBarView extends _reactDefault.default.Component {
     render() {
-        const { user , userID  } = this.props;
-        //console.log(userID);
+        const { onLoggedOut , user  } = this.props;
         return(/*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default, {
+            bg: "light",
+            id: "CineFiles-Navbar",
             __source: {
                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                lineNumber: 18
+                lineNumber: 19
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsxs(_containerDefault.default, {
                 __source: {
                     fileName: "src/components/navbar-view/navbar-view.jsx",
-                    lineNumber: 19
+                    lineNumber: 20
                 },
                 __self: this,
                 children: [
-                    /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Brand, {
-                        href: "#home",
-                        __source: {
-                            fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 20
-                        },
-                        __self: this,
-                        children: "Navbar with text"
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Toggle, {
+                    /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Brand, {
+                        href: "/",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
                             lineNumber: 21
                         },
+                        __self: this,
+                        children: [
+                            /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                src: _cinemaPinkPngDefault.default,
+                                alt: "CineFiles",
+                                className: "d-inline-block align-middle",
+                                width: "55",
+                                height: "55",
+                                __source: {
+                                    fileName: "src/components/navbar-view/navbar-view.jsx",
+                                    lineNumber: 22
+                                },
+                                __self: this
+                            }),
+                            ' ',
+                            " CineFiles"
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Toggle, {
+                        "aria-controls": "basic-navbar-nav",
+                        __source: {
+                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                            lineNumber: 25
+                        },
                         __self: this
                     }),
                     /*#__PURE__*/ _jsxRuntime.jsx(_navbarDefault.default.Collapse, {
+                        id: "basic-navbar-nav",
                         className: "justify-content-end",
                         __source: {
                             fileName: "src/components/navbar-view/navbar-view.jsx",
-                            lineNumber: 22
+                            lineNumber: 26
                         },
                         __self: this,
-                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Text, {
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_navDefault.default, {
+                            className: "me-auto",
                             __source: {
                                 fileName: "src/components/navbar-view/navbar-view.jsx",
-                                lineNumber: 23
+                                lineNumber: 27
                             },
                             __self: this,
                             children: [
-                                "Signed in as: ",
-                                /*#__PURE__*/ _jsxRuntime.jsx("a", {
-                                    href: "#login",
+                                /*#__PURE__*/ _jsxRuntime.jsxs(_navbarDefault.default.Text, {
                                     __source: {
                                         fileName: "src/components/navbar-view/navbar-view.jsx",
-                                        lineNumber: 24
+                                        lineNumber: 28
                                     },
                                     __self: this,
-                                    children: "Mark Otto"
+                                    children: [
+                                        "Hello, ",
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                            to: `/users/${user}`,
+                                            __source: {
+                                                fileName: "src/components/navbar-view/navbar-view.jsx",
+                                                lineNumber: 29
+                                            },
+                                            __self: this,
+                                            children: user
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                    to: "/",
+                                    __source: {
+                                        fileName: "src/components/navbar-view/navbar-view.jsx",
+                                        lineNumber: 31
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                        variant: "link",
+                                        className: "btn-flat",
+                                        onClick: ()=>{
+                                            onLoggedOut();
+                                        },
+                                        __source: {
+                                            fileName: "src/components/navbar-view/navbar-view.jsx",
+                                            lineNumber: 32
+                                        },
+                                        __self: this,
+                                        children: "Logout"
+                                    })
                                 })
                             ]
                         })
@@ -40338,7 +40425,7 @@ class NavBarView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Container":"2PRIq","../../images/cinema-pink.png":"21LTV","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"ikZdr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-router-dom":"cpyQW","react-bootstrap/Nav":"io07g","react-bootstrap/Navbar":"eYZQl","react-bootstrap/Container":"2PRIq","../../images/cinema-pink.png":"21LTV","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-bootstrap/Button":"9CzHT"}],"ikZdr":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -40379,13 +40466,24 @@ parcelHelpers.export(exports, "MovieView", ()=>MovieView
 var _jsxRuntime = require("react/jsx-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
 var _button = require("react-bootstrap/Button");
 var _buttonDefault = parcelHelpers.interopDefault(_button);
 var _image = require("react-bootstrap/Image");
 var _imageDefault = parcelHelpers.interopDefault(_image);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _alert = require("react-bootstrap/Alert");
+var _alertDefault = parcelHelpers.interopDefault(_alert);
 var _reactRouterDom = require("react-router-dom");
+var _navbarView = require("../navbar-view/navbar-view");
 var _movieViewScss = require("./movie-view.scss");
 class MovieView extends _reactDefault.default.Component {
     keypressCallback(event) {
@@ -40397,248 +40495,523 @@ class MovieView extends _reactDefault.default.Component {
     componentWillUnmount() {
         document.removeEventListener('keypress', this.keypressCallback);
     }
+    handleClick() {
+        let accessToken = localStorage.getItem('token');
+        if (!accessToken) return;
+        else this.updateFavoriteMovies(accessToken);
+    }
+    updateFavoriteMovies(token) {
+        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
+            headers : { Authorization : 'Bearer ' + token  }
+        })*/ _axiosDefault.default({
+            method: 'post',
+            url: `http://localhost:8080/users/${this.props.user}/movies/${this.props.movieData.title}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            if (response.data.success) alert('Movie Added!');
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+    refineDate(longDate) {
+        let date = new Date(longDate);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let dt = date.getDate();
+        const monthNames = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
+        if (dt < 10) dt = '0' + dt;
+        /*if (month < 10) {
+            month = '0' + month;
+        }*/ return dt + ' ' + monthNames[month] + ' ' + year;
+    //console.log(year+'-' + month + '-'+dt);
+    }
     render() {
-        const { movieData , onBackClick , onLoggedOut  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsxs("div", {
-            className: "movie-view movie-details-container",
+        const { movieData , onBackClick , onLoggedOut , user , userID  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+            id: "movieView",
             __source: {
                 fileName: "src/components/movie-view/movie-view.jsx",
-                lineNumber: 28
+                lineNumber: 89
             },
             __self: this,
             children: [
-                /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                    className: "movie-image",
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavBarView, {
+                    onLoggedOut: onLoggedOut,
+                    user: user,
+                    userID: userID,
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 29
+                        lineNumber: 90
                     },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_imageDefault.default, {
-                        src: movieData.imagePath,
-                        width: "200",
-                        height: "300",
-                        crossOrigin: "anonymous",
-                        __source: {
-                            fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 30
-                        },
-                        __self: this
-                    })
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-title movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 32
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 33
-                            },
-                            __self: this,
-                            children: "Title: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 34
-                            },
-                            __self: this,
-                            children: [
-                                movieData.title,
-                                ":"
-                            ]
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-director movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 36
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 37
-                            },
-                            __self: this,
-                            children: "Rating: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 38
-                            },
-                            __self: this,
-                            children: movieData.rating.name
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-director movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 40
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 41
-                            },
-                            __self: this,
-                            children: "Genre: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 42
-                            },
-                            __self: this,
-                            children: movieData.genre.name
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-director movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 44
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 45
-                            },
-                            __self: this,
-                            children: "Release Date: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 46
-                            },
-                            __self: this,
-                            children: movieData.release
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-director movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 48
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 49
-                            },
-                            __self: this,
-                            children: "Director: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 50
-                            },
-                            __self: this,
-                            children: movieData.director.name
-                        })
-                    ]
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsxs("div", {
-                    className: "movie-description movie-details-container",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 52
-                    },
-                    __self: this,
-                    children: [
-                        /*#__PURE__*/ _jsxRuntime.jsx("span", {
-                            className: "label",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 53
-                            },
-                            __self: this,
-                            children: "Description: "
-                        }),
-                        /*#__PURE__*/ _jsxRuntime.jsxs("span", {
-                            className: "value",
-                            __source: {
-                                fileName: "src/components/movie-view/movie-view.jsx",
-                                lineNumber: 54
-                            },
-                            __self: this,
-                            children: [
-                                movieData.description,
-                                ":"
-                            ]
-                        })
-                    ]
+                    __self: this
                 }),
                 /*#__PURE__*/ _jsxRuntime.jsx("br", {
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 56
+                        lineNumber: 91
                     },
                     __self: this
                 }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                    className: "custom-button",
-                    type: "button",
-                    onClick: ()=>{
-                        onBackClick(null);
-                    },
+                /*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
+                    id: "movie-info",
                     __source: {
                         fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 57
+                        lineNumber: 92
                     },
                     __self: this,
-                    children: "Back"
-                }),
-                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
-                    to: "/",
-                    __source: {
-                        fileName: "src/components/movie-view/movie-view.jsx",
-                        lineNumber: 58
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
-                        variant: "link",
-                        className: "btn-flat",
-                        onClick: ()=>{
-                            onLoggedOut();
-                        },
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
                         __source: {
                             fileName: "src/components/movie-view/movie-view.jsx",
-                            lineNumber: 59
+                            lineNumber: 93
                         },
                         __self: this,
-                        children: "Logout"
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                            className: "bg-light",
+                            __source: {
+                                fileName: "src/components/movie-view/movie-view.jsx",
+                                lineNumber: 94
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    className: "details-container",
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 95
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        className: "details text-center",
+                                        __source: {
+                                            fileName: "src/components/movie-view/movie-view.jsx",
+                                            lineNumber: 96
+                                        },
+                                        __self: this,
+                                        children: movieData.featured ? /*#__PURE__*/ _jsxRuntime.jsx("h4", {
+                                            className: "title",
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 96
+                                            },
+                                            __self: this,
+                                            children: "Featured"
+                                        }) : /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 96
+                                            },
+                                            __self: this
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 98
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                            lg: 4,
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 99
+                                            },
+                                            __self: this,
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_imageDefault.default, {
+                                                src: movieData.imagePath,
+                                                alt: movieData.title,
+                                                crossOrigin: "anonymous",
+                                                className: "poster-img",
+                                                __source: {
+                                                    fileName: "src/components/movie-view/movie-view.jsx",
+                                                    lineNumber: 100
+                                                },
+                                                __self: this
+                                            })
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                            lg: 8,
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 102
+                                            },
+                                            __self: this,
+                                            children: [
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 103
+                                                    },
+                                                    __self: this,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        __source: {
+                                                            fileName: "src/components/movie-view/movie-view.jsx",
+                                                            lineNumber: 104
+                                                        },
+                                                        __self: this,
+                                                        children: /*#__PURE__*/ _jsxRuntime.jsx("h2", {
+                                                            className: "title",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 104
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.title
+                                                        })
+                                                    })
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 106
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 107
+                                                            },
+                                                            __self: this,
+                                                            children: "Release Date:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 108
+                                                            },
+                                                            __self: this,
+                                                            children: this.refineDate(movieData.release)
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 110
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 111
+                                                            },
+                                                            __self: this,
+                                                            children: "Runtime:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 112
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.runtime
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 114
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 115
+                                                            },
+                                                            __self: this,
+                                                            children: " Cast: "
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 116
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.cast.map((cast)=>/*#__PURE__*/ _jsxRuntime.jsxs("span", {
+                                                                    __source: {
+                                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                                        lineNumber: 117
+                                                                    },
+                                                                    __self: this,
+                                                                    children: [
+                                                                        cast,
+                                                                        " "
+                                                                    ]
+                                                                })
+                                                            )
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 121
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 122
+                                                            },
+                                                            __self: this,
+                                                            children: " Director: "
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 123
+                                                            },
+                                                            __self: this,
+                                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                                                to: `/directors/${movieData.director.name}`,
+                                                                __source: {
+                                                                    fileName: "src/components/movie-view/movie-view.jsx",
+                                                                    lineNumber: 124
+                                                                },
+                                                                __self: this,
+                                                                children: movieData.director.name
+                                                            })
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 127
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 128
+                                                            },
+                                                            __self: this,
+                                                            children: "Genre:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 129
+                                                            },
+                                                            __self: this,
+                                                            children: [
+                                                                " ",
+                                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactRouterDom.Link, {
+                                                                    to: `/genre/${movieData.genre.name}`,
+                                                                    __source: {
+                                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                                        lineNumber: 129
+                                                                    },
+                                                                    __self: this,
+                                                                    children: movieData.genre.name
+                                                                })
+                                                            ]
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 131
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 132
+                                                            },
+                                                            __self: this,
+                                                            children: "Rating:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 133
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.rating.name
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 135
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 136
+                                                            },
+                                                            __self: this,
+                                                            children: "Budget:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 137
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.budget
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 139
+                                                    },
+                                                    __self: this,
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            lg: 3,
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 140
+                                                            },
+                                                            __self: this,
+                                                            children: "Gross Profit:"
+                                                        }),
+                                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                            className: "details",
+                                                            __source: {
+                                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                                lineNumber: 141
+                                                            },
+                                                            __self: this,
+                                                            children: movieData.gross
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                                    className: "details-container",
+                                                    __source: {
+                                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                                        lineNumber: 143
+                                                    },
+                                                    __self: this,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/movie-view/movie-view.jsx",
+                                                            lineNumber: 144
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.description
+                                                    })
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 148
+                                    },
+                                    __self: this,
+                                    children: [
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                            lg: {
+                                                offset: 3
+                                            },
+                                            className: "text-center",
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 149
+                                            },
+                                            __self: this,
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                                variant: "flat",
+                                                onClick: ()=>{
+                                                    onBackClick(null);
+                                                },
+                                                __source: {
+                                                    fileName: "src/components/movie-view/movie-view.jsx",
+                                                    lineNumber: 150
+                                                },
+                                                __self: this,
+                                                children: "Back"
+                                            })
+                                        }),
+                                        /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                            className: "text-center",
+                                            __source: {
+                                                fileName: "src/components/movie-view/movie-view.jsx",
+                                                lineNumber: 151
+                                            },
+                                            __self: this,
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                                variant: "flat",
+                                                onClick: ()=>this.handleClick()
+                                                ,
+                                                __source: {
+                                                    fileName: "src/components/movie-view/movie-view.jsx",
+                                                    lineNumber: 152
+                                                },
+                                                __self: this,
+                                                children: "Add Movie"
+                                            })
+                                        })
+                                    ]
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "src/components/movie-view/movie-view.jsx",
+                                        lineNumber: 155
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
                     })
                 })
             ]
@@ -40651,6 +41024,1007 @@ class MovieView extends _reactDefault.default.Component {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Button":"9CzHT","react-bootstrap/Image":"kKVYG","react-router-dom":"cpyQW","./movie-view.scss":"kvL93","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"kvL93":[function() {},{}],"jyMAr":[function() {},{}],"jUTZ8":[function() {},{}]},["2rAXy","60AuU","dLPEP"], "dLPEP", "parcelRequire315a")
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-bootstrap/Image":"kKVYG","react-bootstrap/Container":"2PRIq","react-router-dom":"cpyQW","../navbar-view/navbar-view":"j0Dt2","./movie-view.scss":"kvL93","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","axios":"iYoWk","react-bootstrap/Alert":"d0bvJ"}],"kvL93":[function() {},{}],"ck15y":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "DirectorView", ()=>DirectorView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _reactRouterDom = require("react-router-dom");
+var _navbarView = require("../navbar-view/navbar-view");
+var _directorViewScss = require("./director-view.scss");
+class DirectorView extends _reactDefault.default.Component {
+    truncate(str) {
+        return str.length > 100 ? str.substring(0, 100) + "..." : str;
+    }
+    refineDate(longDate) {
+        let date = new Date(longDate);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let dt = date.getDate();
+        const monthNames = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
+        if (dt < 10) dt = '0' + dt;
+        /*if (month < 10) {
+            month = '0' + month;
+        }*/ return dt + ' ' + monthNames[month] + ' ' + year;
+    //console.log(year+'-' + month + '-'+dt);
+    }
+    render() {
+        const { movieData , onBackClick , onLoggedOut , user , userID  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+            id: "directorView",
+            __source: {
+                fileName: "src/components/director-view/director-view.jsx",
+                lineNumber: 46
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavBarView, {
+                    onLoggedOut: onLoggedOut,
+                    user: user,
+                    userID: userID,
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 47
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 48
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
+                    id: "director-info",
+                    __source: {
+                        fileName: "src/components/director-view/director-view.jsx",
+                        lineNumber: 49
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                        __source: {
+                            fileName: "src/components/director-view/director-view.jsx",
+                            lineNumber: 50
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                            className: "bg-light",
+                            __source: {
+                                fileName: "src/components/director-view/director-view.jsx",
+                                lineNumber: 51
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 52
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/director-view/director-view.jsx",
+                                            lineNumber: 53
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/director-view/director-view.jsx",
+                                                    lineNumber: 54
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                    __source: {
+                                                        fileName: "src/components/director-view/director-view.jsx",
+                                                        lineNumber: 55
+                                                    },
+                                                    __self: this,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h2", {
+                                                        className: "title",
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 55
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.director.name
+                                                    })
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/director-view/director-view.jsx",
+                                                    lineNumber: 57
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 3,
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 58
+                                                        },
+                                                        __self: this,
+                                                        children: "Birthdate:"
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 59
+                                                        },
+                                                        __self: this,
+                                                        children: this.refineDate(movieData.director.birthdate)
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/director-view/director-view.jsx",
+                                                    lineNumber: 61
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 3,
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 62
+                                                        },
+                                                        __self: this,
+                                                        children: "Biography:"
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 63
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.director.bio
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/director-view/director-view.jsx",
+                                                    lineNumber: 65
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 3,
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 66
+                                                        },
+                                                        __self: this,
+                                                        children: " Movies: "
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/director-view/director-view.jsx",
+                                                            lineNumber: 67
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.title
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 71
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        className: "text-center",
+                                        __source: {
+                                            fileName: "src/components/director-view/director-view.jsx",
+                                            lineNumber: 72
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "flat",
+                                            onClick: ()=>{
+                                                onBackClick(null);
+                                            },
+                                            __source: {
+                                                fileName: "src/components/director-view/director-view.jsx",
+                                                lineNumber: 73
+                                            },
+                                            __self: this,
+                                            children: "Back"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "src/components/director-view/director-view.jsx",
+                                        lineNumber: 76
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
+                    })
+                })
+            ]
+        }));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-bootstrap/Container":"2PRIq","react-router-dom":"cpyQW","../navbar-view/navbar-view":"j0Dt2","./director-view.scss":"hWS1b","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"hWS1b":[function() {},{}],"8WCoL":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "GenreView", ()=>GenreView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _reactRouterDom = require("react-router-dom");
+var _navbarView = require("../navbar-view/navbar-view");
+var _genreViewScss = require("./genre-view.scss");
+class GenreView extends _reactDefault.default.Component {
+    render() {
+        const { movieData , onBackClick , onLoggedOut , user , userID  } = this.props;
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+            id: "genreView",
+            __source: {
+                fileName: "src/components/genre-view/genre-view.jsx",
+                lineNumber: 21
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavBarView, {
+                    onLoggedOut: onLoggedOut,
+                    user: user,
+                    userID: userID,
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 22
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 23
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
+                    id: "director-info",
+                    __source: {
+                        fileName: "src/components/genre-view/genre-view.jsx",
+                        lineNumber: 24
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                        __source: {
+                            fileName: "src/components/genre-view/genre-view.jsx",
+                            lineNumber: 25
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                            className: "bg-light",
+                            __source: {
+                                fileName: "src/components/genre-view/genre-view.jsx",
+                                lineNumber: 26
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 27
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                            lineNumber: 28
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/genre-view/genre-view.jsx",
+                                                    lineNumber: 29
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                    __source: {
+                                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                                        lineNumber: 30
+                                                    },
+                                                    __self: this,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h2", {
+                                                        className: "title",
+                                                        __source: {
+                                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                                            lineNumber: 30
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.genre.name
+                                                    })
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/genre-view/genre-view.jsx",
+                                                    lineNumber: 32
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 3,
+                                                        __source: {
+                                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                                            lineNumber: 33
+                                                        },
+                                                        __self: this,
+                                                        children: "Description:"
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                                            lineNumber: 34
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.genre.description
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/genre-view/genre-view.jsx",
+                                                    lineNumber: 36
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 3,
+                                                        __source: {
+                                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                                            lineNumber: 37
+                                                        },
+                                                        __self: this,
+                                                        children: " Movies: "
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                                            lineNumber: 38
+                                                        },
+                                                        __self: this,
+                                                        children: movieData.title
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 42
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        className: "text-center",
+                                        __source: {
+                                            fileName: "src/components/genre-view/genre-view.jsx",
+                                            lineNumber: 43
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "flat",
+                                            onClick: ()=>{
+                                                onBackClick(null);
+                                            },
+                                            __source: {
+                                                fileName: "src/components/genre-view/genre-view.jsx",
+                                                lineNumber: 44
+                                            },
+                                            __self: this,
+                                            children: "Back"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "src/components/genre-view/genre-view.jsx",
+                                        lineNumber: 47
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
+                    })
+                })
+            ]
+        }));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-bootstrap/Container":"2PRIq","react-router-dom":"cpyQW","../navbar-view/navbar-view":"j0Dt2","./genre-view.scss":"3BqnD","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J"}],"3BqnD":[function() {},{}],"jyMAr":[function() {},{}],"fZtM6":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "UserView", ()=>UserView
+);
+var _jsxRuntime = require("react/jsx-runtime");
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+var _axios = require("axios");
+var _axiosDefault = parcelHelpers.interopDefault(_axios);
+var _propTypes = require("prop-types");
+var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
+var _row = require("react-bootstrap/Row");
+var _rowDefault = parcelHelpers.interopDefault(_row);
+var _col = require("react-bootstrap/Col");
+var _colDefault = parcelHelpers.interopDefault(_col);
+var _button = require("react-bootstrap/Button");
+var _buttonDefault = parcelHelpers.interopDefault(_button);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
+var _card = require("react-bootstrap/Card");
+var _cardDefault = parcelHelpers.interopDefault(_card);
+var _reactRouterDom = require("react-router-dom");
+var _navbarView = require("../navbar-view/navbar-view");
+var _userViewScss = require("./user-view.scss");
+class UserView extends _reactDefault.default.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isLoading: true,
+            userData: undefined,
+            hasFaveMovies: false,
+            editing: false
+        };
+        this.firstname = '';
+        this.lastname = '';
+    }
+    componentDidMount() {
+        let accessToken = localStorage.getItem('token');
+        //console.debug("After mount! Let's load data from API...");
+        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
+            headers : { Authorization : 'Bearer ' + token  }
+        })*/ _axiosDefault.default({
+            method: 'get',
+            url: `http://localhost:8080/users/${this.props.user}`,
+            headers: {
+                Authorization: `Bearer ${accessToken}`
+            }
+        }).then((response)=>{
+            //console.log(response.data);
+            this.setState({
+                userData: response.data
+            });
+            this.setState({
+                isLoading: false
+            });
+            if (response.data.favoredMovies != 0) this.setState({
+                hasFaveMovies: true
+            });
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+    handleClick(movie) {
+        let accessToken = localStorage.getItem('token');
+        if (!accessToken) return;
+        else this.updateFavoriteMovies(accessToken, movie);
+    }
+    updateFavoriteMovies(token, movie) {
+        /*Axios.get('https://cinefiles-api.herokuapp.com/movies',{
+            headers : { Authorization : 'Bearer ' + token  }
+        })*/ _axiosDefault.default({
+            method: 'delete',
+            url: `http://localhost:8080/users/${this.state.userData.username}/movies/${movie}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            this.setState({
+                userData: response.data
+            });
+            this.setState({
+                isLoading: false
+            });
+            if (response.data.favoredMovies != 0) this.setState({
+                hasFaveMovies: true
+            });
+        // if(response.data.success)
+        //alert('Movie Added!');
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+    DeleteProfile() {
+        let token = localStorage.getItem('token');
+        _axiosDefault.default({
+            method: 'delete',
+            url: `http://localhost:8080/users/${this.state.userData.username}`,
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            alert('Profile Deleted');
+            this.props.onLoggedOut();
+        }).catch((error)=>{
+            console.log(error);
+        });
+    }
+    saveEdit() {
+        let token = localStorage.getItem('token');
+        console.log(this.firstname);
+    }
+    truncate(str) {
+        return str.length > 100 ? str.substring(0, 100) + "..." : str;
+    }
+    refineDate(longDate) {
+        let date = new Date(longDate);
+        let year = date.getFullYear();
+        let month = date.getMonth() + 1;
+        let dt = date.getDate();
+        const monthNames = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ];
+        if (dt < 10) dt = '0' + dt;
+        /*if (month < 10) {
+            month = '0' + month;
+        }*/ return dt + ' ' + monthNames[month] + ' ' + year;
+    //console.log(year+'-' + month + '-'+dt);
+    }
+    render() {
+        const { onLoggedOut , user , userID  } = this.props;
+        const { isLoading , userData  } = this.state;
+        if (isLoading) return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
+            className: "App",
+            __source: {
+                fileName: "src/components/user-view/user-view.jsx",
+                lineNumber: 146
+            },
+            __self: this,
+            children: "Loading..."
+        }));
+        console.log(userData);
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+            id: "userView",
+            __source: {
+                fileName: "src/components/user-view/user-view.jsx",
+                lineNumber: 152
+            },
+            __self: this,
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsx(_navbarView.NavBarView, {
+                    onLoggedOut: onLoggedOut,
+                    user: user,
+                    userID: userID,
+                    __source: {
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 153
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                    __source: {
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 154
+                    },
+                    __self: this
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
+                    id: "user-info",
+                    __source: {
+                        fileName: "src/components/user-view/user-view.jsx",
+                        lineNumber: 155
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                        __source: {
+                            fileName: "src/components/user-view/user-view.jsx",
+                            lineNumber: 156
+                        },
+                        __self: this,
+                        children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                            className: "bg-light",
+                            __source: {
+                                fileName: "src/components/user-view/user-view.jsx",
+                                lineNumber: 157
+                            },
+                            __self: this,
+                            children: [
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 158
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsxs(_colDefault.default, {
+                                        __source: {
+                                            fileName: "src/components/user-view/user-view.jsx",
+                                            lineNumber: 159
+                                        },
+                                        __self: this,
+                                        children: [
+                                            /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 160
+                                                },
+                                                __self: this,
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                    __source: {
+                                                        fileName: "src/components/user-view/user-view.jsx",
+                                                        lineNumber: 161
+                                                    },
+                                                    __self: this,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx("h2", {
+                                                        className: "title",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 161
+                                                        },
+                                                        __self: this,
+                                                        children: userData.username
+                                                    })
+                                                })
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 163
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 4,
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 164
+                                                        },
+                                                        __self: this,
+                                                        children: " First Name:"
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 165
+                                                        },
+                                                        __self: this,
+                                                        children: this.state.editing ? userData.firstname : /*#__PURE__*/ _jsxRuntime.jsx("input", {
+                                                            type: "text",
+                                                            defaultValue: userData.firstname,
+                                                            ref: (node)=>{
+                                                                this.firstname = node;
+                                                            },
+                                                            __source: {
+                                                                fileName: "src/components/user-view/user-view.jsx",
+                                                                lineNumber: 169
+                                                            },
+                                                            __self: this
+                                                        })
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 173
+                                                        },
+                                                        __self: this,
+                                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                                            variant: "flat",
+                                                            onClick: ()=>this.saveEdit()
+                                                            ,
+                                                            __source: {
+                                                                fileName: "src/components/user-view/user-view.jsx",
+                                                                lineNumber: 174
+                                                            },
+                                                            __self: this,
+                                                            children: "Save"
+                                                        })
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 177
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 4,
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 178
+                                                        },
+                                                        __self: this,
+                                                        children: " Last Name "
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 179
+                                                        },
+                                                        __self: this,
+                                                        children: userData.lastname
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 181
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 4,
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 182
+                                                        },
+                                                        __self: this,
+                                                        children: "Email Address:"
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 183
+                                                        },
+                                                        __self: this,
+                                                        children: userData.email
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 185
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 4,
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 186
+                                                        },
+                                                        __self: this,
+                                                        children: " Birthday: "
+                                                    }),
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 187
+                                                        },
+                                                        __self: this,
+                                                        children: this.refineDate(userData.birthdate)
+                                                    })
+                                                ]
+                                            }),
+                                            /*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                className: "details-container",
+                                                __source: {
+                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                    lineNumber: 189
+                                                },
+                                                __self: this,
+                                                children: [
+                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        lg: 4,
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 190
+                                                        },
+                                                        __self: this,
+                                                        children: " Favorite Movies: "
+                                                    }),
+                                                    !userData.favoredMovies ? /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 191
+                                                        },
+                                                        __self: this
+                                                    }) : /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                        className: "details",
+                                                        __source: {
+                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                            lineNumber: 192
+                                                        },
+                                                        __self: this,
+                                                        children: userData.favoredMovies.map((fave)=>/*#__PURE__*/ _jsxRuntime.jsxs(_rowDefault.default, {
+                                                                __source: {
+                                                                    fileName: "src/components/user-view/user-view.jsx",
+                                                                    lineNumber: 194
+                                                                },
+                                                                __self: this,
+                                                                children: [
+                                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                                        __source: {
+                                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                                            lineNumber: 195
+                                                                        },
+                                                                        __self: this,
+                                                                        children: fave
+                                                                    }),
+                                                                    /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                                                        className: "text-center",
+                                                                        __source: {
+                                                                            fileName: "src/components/user-view/user-view.jsx",
+                                                                            lineNumber: 196
+                                                                        },
+                                                                        __self: this,
+                                                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                                                            variant: "flat",
+                                                                            onClick: ()=>this.handleClick(fave)
+                                                                            ,
+                                                                            __source: {
+                                                                                fileName: "src/components/user-view/user-view.jsx",
+                                                                                lineNumber: 197
+                                                                            },
+                                                                            __self: this,
+                                                                            children: "Remove Movie"
+                                                                        })
+                                                                    })
+                                                                ]
+                                                            })
+                                                        )
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx(_rowDefault.default, {
+                                    __source: {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 206
+                                    },
+                                    __self: this,
+                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_colDefault.default, {
+                                        className: "text-center",
+                                        __source: {
+                                            fileName: "src/components/user-view/user-view.jsx",
+                                            lineNumber: 207
+                                        },
+                                        __self: this,
+                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_buttonDefault.default, {
+                                            variant: "flat",
+                                            onClick: ()=>this.DeleteProfile()
+                                            ,
+                                            __source: {
+                                                fileName: "src/components/user-view/user-view.jsx",
+                                                lineNumber: 207
+                                            },
+                                            __self: this,
+                                            children: "Delete Profile"
+                                        })
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("br", {
+                                    __source: {
+                                        fileName: "src/components/user-view/user-view.jsx",
+                                        lineNumber: 209
+                                    },
+                                    __self: this
+                                })
+                            ]
+                        })
+                    })
+                })
+            ]
+        }));
+    }
+}
+
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","react-bootstrap/Row":"c0x1x","react-bootstrap/Col":"fbam0","react-bootstrap/Button":"9CzHT","react-router-dom":"cpyQW","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-bootstrap/Container":"2PRIq","../navbar-view/navbar-view":"j0Dt2","./user-view.scss":"e7l6L","axios":"iYoWk","react-bootstrap/Card":"MoOk8"}],"e7l6L":[function() {},{}],"jUTZ8":[function() {},{}]},["2rAXy","60AuU","dLPEP"], "dLPEP", "parcelRequire315a")
 
 //# sourceMappingURL=index.6701a6e1.js.map

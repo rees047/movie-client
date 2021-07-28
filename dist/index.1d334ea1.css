@@ -2,6 +2,9 @@
 
 
 
+
+
+
 html body {
   background-color: #3d147b;
 }
@@ -76,5 +79,38 @@ html body {
 #movieCard .card {
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+#CineFiles-Navbar .btn-flat {
+  letter-spacing: normal;
+  margin-left: 2em;
+}
+
+#movieView .poster-img {
+  width: 100%;
+}
+
+#movie-info, #director-info {
+  letter-spacing: normal;
+}
+
+#movie-info .title, #director-info .title, #user-info .title {
+  background-color: #ffa5d2;
+  color: #3d147b;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  text-align: center;
+}
+
+#movie-info .details-container, #director-info .details-container, #user-info .details-container {
+  margin-bottom: 0.75em;
+}
+
+#movie-info .details, #director-info .details, #user-info .details {
+  color: #3d147b;
+}
+
+#user-info .details .btn-flat {
+  margin-bottom: 12px;
 }
 /*# sourceMappingURL=index.1d334ea1.css.map */
