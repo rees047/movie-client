@@ -1,0 +1,116 @@
+#movieCard img.card-img-top {
+  object-fit: cover;
+  height: 380px;
+}
+
+#movieCard .card-text {
+  letter-spacing: normal;
+  font-size: 0.85em;
+}
+
+#movieCard .card-title {
+  letter-spacing: normal;
+}
+
+#movieCard .card {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#CineFiles-Navbar .btn-flat {
+  letter-spacing: normal;
+  margin-left: 2em;
+}
+#login .logo-image {
+  height: 300px;
+}
+
+#login .error-msg {
+  font-size: 1.5em;
+  padding: 0.25em;
+  letter-spacing: normal;
+}
+#register .logo-image {
+  height: 200px;
+}
+
+#register .text-muted {
+  color: #eeeeee !important;
+  letter-spacing: normal;
+}
+
+#register .error-msg {
+  font-size: 1em;
+  letter-spacing: normal;
+  list-style: none;
+}
+
+.icon-atr {
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 0.6em;
+}
+#movieView .poster-img {
+  width: 100%;
+}
+
+
+#user-info .error-msg {
+  color: #3d147b;
+}
+
+html body {
+  background-color: #3d147b;
+}
+
+#CineFiles-Client {
+  font-family: "Space Mono", monospace;
+  color: #ffa5d2;
+  letter-spacing: 0.5em;
+}
+
+.btn-flat {
+  background-color: #fd00fe !important;
+  color: #eeeeee !important;
+}
+
+.btn-flat:hover {
+  background-color: #ffa5d2 !important;
+  color: #3d147b !important;
+  text-decoration: none !important;
+}
+
+.has-height-600 {
+  height: 600px;
+  margin-top: 5%;
+}
+
+.error-msg {
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+#movie-info, #director-info {
+  letter-spacing: normal;
+}
+
+#movie-info .title, #director-info .title, #user-info .title {
+  background-color: #ffa5d2;
+  color: #3d147b;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  text-align: center;
+}
+
+#movie-info .details-container, #director-info .details-container, #user-info .details-container {
+  margin-bottom: 0.75em;
+}
+
+#movie-info .details, #director-info .details, #user-info .details {
+  color: #3d147b;
+}
+
+#user-info .details .btn-flat {
+  margin-bottom: 12px;
+}
+/*# sourceMappingURL=index.3f764291.css.map */

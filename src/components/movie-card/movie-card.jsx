@@ -8,7 +8,6 @@ import Card from 'react-bootstrap/Card';
 
 import {Link} from 'react-router-dom';
 
-import {NavBarView} from '../navbar-view/navbar-view';
 import  './movie-card.scss';
 
 export class MovieCard extends React.Component{
@@ -33,43 +32,22 @@ export class MovieCard extends React.Component{
 
         //console.log(user);
        
-        const { movieData, onLoggedOut, user, userID } = this.props;
-        
-        //convert your array to a matrix as per your need
-        const movieRows = movieData.reduce(function (rows, key, index) { 
-            return (index % 4 == 0 ? rows.push([key]) 
-              : rows[rows.length-1].push(key)) && rows;
-          }, []);
-          
-        //console.log(movieRows)
+        const { movieData } = this.props;
        
         return (
-            <Col id="movieCard">
-
-                { /* checkAccess() */}
-                <NavBarView onLoggedOut={onLoggedOut} user={user} userID={userID} />
-                { movieRows.map(movieRow => (
-                <Row>
-                    { movieRow.map(movieColData => (
-                        <Col lg={3} className="d-flex align-items-normal" key={movieColData._id}>
-                            <Card>
-                                <Card.Header className="text-center font-weight-bold">{movieColData.featured ? "Featured" : <br/>}</Card.Header>
-                                <Card.Img variant="top" src= {movieColData.imagePath} crossOrigin="anonymous"/>
-                                <Card.Body>
-                                    <Card.Title>{movieColData.title}</Card.Title>
-                                    <Card.Text>{this.truncate(movieColData.description)}</Card.Text>
-                                </Card.Body>
-                                <Card.Footer className="text-center">
-                                    <Link to={`/movies/${movieColData.title}`}>
-                                        <Button variant="link" className="btn-flat">Open</Button>
-                                    </Link>
-                                </Card.Footer>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
-            ))} 
-            </Col>
+            <Card>
+                <Card.Header className="text-center font-weight-bold">{movieData.featured ? "Featured" : <br/>}</Card.Header>
+                <Card.Img variant="top" src= {movieData.imagePath} crossOrigin="anonymous"/>
+                <Card.Body>
+                    <Card.Title>{movieData.title}</Card.Title>
+                    <Card.Text>{this.truncate(movieData.description)}</Card.Text>
+                </Card.Body>
+                <Card.Footer className="text-center">
+                    <Link to={`/movies/${movieData.title}`}>
+                        <Button variant="link" className="btn-flat">Open</Button>
+                    </Link>
+                </Card.Footer>
+            </Card>
         );        
     }
 

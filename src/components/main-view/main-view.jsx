@@ -1,14 +1,23 @@
 import React from 'react';
 import Axios from 'axios';
 
+import { connect } from 'react-redux';
 import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+
+// #0
+import { setMovies } from '../../actions/actions';
+// we haven't written this one yet
+import MoviesList from '../movies-list/movies-list';
+/*
+#1 The rest of the components import statements but without the MovieCard's because it will be imported and sed in the MoviesList component rather than in here
+*/
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
 
 import {LoginView} from '../login-view/login-view';
 import {RegisterView} from '../register-view/register-view';
-import {MovieCard} from '../movie-card/movie-card';
+//import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
@@ -16,12 +25,14 @@ import {UserView} from '../user-view/user-view';
 
 import  './main-view.scss';
 
-export class MainView extends React.Component{
+// #2 export keyword removed from here
+class MainView extends React.Component{
 
     constructor(){
         super();
-        this.state = { //initial state is set to null
-            movies : [],
+
+        // #3 movies state removed from here
+        this.state = { //initial state is set to null         
             selectedMovie: null,
             user: null,
             userID: null
@@ -71,7 +82,10 @@ export class MainView extends React.Component{
     }
 
     render(){
-        const {movies, user, userID} = this.state;   
+        const {user, userID} = this.state;   
+
+        //#5 movies is extractd from this.props rather than from the this.state
+        let { movies } = this.props;
         
         return (
             <Router>
@@ -107,7 +121,8 @@ export class MainView extends React.Component{
                         <Route path="/movies" render ={() => {
                             if(!user) return <Redirect to="/" />
                             if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
-                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
+                            //return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
+                            return <MoviesList movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} />
 
                         <Route exact path="/" render = {() => {
@@ -117,9 +132,9 @@ export class MainView extends React.Component{
                     </Switch>
                 </Row>
                 
-            </Router>
+            </Router>            
         );  
-    }
+    }  
     
     getMovies(token){
 
@@ -142,9 +157,13 @@ export class MainView extends React.Component{
             //console.log(response.data);
             //console.log(movieData); //after modified image path
             
-            this.setState({
+            //replaced by redux set Movies
+            /*this.setState({
                 movies: response.data
-            });
+            });*/
+
+            // #4
+            this.props.setMovies(response.data);
         })
         .catch(error => {
             console.log(error);
@@ -153,3 +172,11 @@ export class MainView extends React.Component{
     }
 
 }
+
+// #7 
+let mapStatetoProps = state => {
+        return { movies : state.movies }
+    }
+
+
+export default connect(mapStatetoProps, { setMovies })(MainView);
