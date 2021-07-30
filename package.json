@@ -32,6 +32,5 @@
     "@parcel/transformer-image": "^2.0.0-nightly.2400",
     "@parcel/transformer-sass": "^2.0.0-nightly.778",
     "parcel": "^2.0.0-nightly.776"
-  },
-  "main" : "src/index.html"
+  }
 }
