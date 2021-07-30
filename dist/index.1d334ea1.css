@@ -21,6 +21,12 @@
   letter-spacing: normal;
   list-style: none;
 }
+
+.icon-atr {
+  letter-spacing: normal;
+  text-align: center;
+  font-size: 0.6em;
+}
 #CineFiles-Navbar .btn-flat {
   letter-spacing: normal;
   margin-left: 2em;

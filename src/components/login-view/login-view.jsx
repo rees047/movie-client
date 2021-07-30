@@ -6,7 +6,8 @@ import { Row, Col, Form, Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import  './login-view.scss';
-import logo from '../../images/cinema-pink.png';
+//import logo from '../../images/cinema-pink.png';
+import logo from 'url:../../images/cinema-pink.png';
 
 export function LoginView(props){
 

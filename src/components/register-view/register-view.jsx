@@ -11,7 +11,8 @@ import Image from 'react-bootstrap/Image';
 import { Link } from 'react-router-dom';
 
 import  './register-view.scss';
-import logo from '../../images/cinema-pink.png';
+//import logo from '../../images/cinema-pink.png';
+import logo from 'url:../../images/cinema-pink.png';
 
 
 export function RegisterView(props){
@@ -61,6 +62,7 @@ export function RegisterView(props){
                     <Row>
                         <Col className="text-center">
                             <Image src={logo} rounded alt="Cinema-Files-Logo" className="logo-image" />
+                            <p><small className="icon-atr">Icon from https://www.flaticon.com/</small></p>
                         </Col>
                     </Row>
                     <Row>
