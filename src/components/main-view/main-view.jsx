@@ -122,7 +122,7 @@ class MainView extends React.Component{
                             if(!user) return <Redirect to="/" />
                             if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
                             //return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
-                            return <MobiesList movies= {movies} />
+                            return <MoviesList movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} />
 
                         <Route exact path="/" render = {() => {
@@ -171,11 +171,12 @@ class MainView extends React.Component{
 
     }
 
-    // #7 
-    mapStatetoProps = state => {
+}
+
+// #7 
+let mapStatetoProps = state => {
         return { movies : state.movies }
     }
 
-}
 
 export default connect(mapStatetoProps, { setMovies })(MainView);
