@@ -25418,7 +25418,6 @@ function movies(state = [], action) {
     }
 }
 function user(state = '', action) {
-    console.log(action.type);
     switch(action.type){
         case _actions.SET_USER:
             return action.value;
