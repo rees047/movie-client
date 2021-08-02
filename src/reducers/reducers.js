@@ -27,7 +27,7 @@ function movies(state = [], action){
 }
 
 function user(state = '', action){   
-    console.log(action.type);
+
     switch (action.type){
         
         case SET_USER: 
