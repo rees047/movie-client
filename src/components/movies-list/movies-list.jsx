@@ -29,7 +29,7 @@ function MoviesList(props){
         
 
         <Col id="movieCard">
-            <NavBarView onLoggedOut={onLoggedOut} user={user} userID={userID} />
+            <NavBarView onLoggedOut={onLoggedOut} user={user} />
             <Row>
                { filteredMovies.map(m => (
                     <Col lg={3} className="d-flex align-items-normal" key={movieData._id}>

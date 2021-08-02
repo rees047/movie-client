@@ -1,59 +1,63 @@
 import React from 'react';
 import Axios from 'axios';
 
-import { connect } from 'react-redux';
 import {BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-
-// #0
-import { setMovies, setUser, setUserData} from '../../actions/actions';
-// we haven't written this one yet
-import MoviesList from '../movies-list/movies-list';
-/*
-#1 The rest of the components import statements but without the MovieCard's because it will be imported and sed in the MoviesList component rather than in here
-*/
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Row';
 
 import {LoginView} from '../login-view/login-view';
 import {RegisterView} from '../register-view/register-view';
-//import {MovieCard} from '../movie-card/movie-card';
+import {MovieCard} from '../movie-card/movie-card';
 import {MovieView} from '../movie-view/movie-view';
 import {DirectorView} from '../director-view/director-view';
 import {GenreView} from '../genre-view/genre-view';
 import {UserView} from '../user-view/user-view';
-//import UserList from '../user-list/user-list';
 
 import  './main-view.scss';
 
-// #2 export keyword removed from here
-class MainView extends React.Component{
+export class MainView extends React.Component{
 
     constructor(){
         super();
+        this.state = { //initial state is set to null
+            movies : [],
+            selectedMovie: null,
+            user: null,
+            userID: null
+        }
         this.onLoggedOut = this.onLoggedOut.bind(this);
-
-        // #3 movies state removed from here        
     }    
 
-    componentDidMount(){              
+    componentDidMount(){       
+       
         let accessToken = localStorage.getItem('token');
 
         if(accessToken !==null){
-            this.props.setUser(localStorage.getItem("user"));
+            this.setState({
+                user: localStorage.getItem('user'),
+                userID: localStorage.getItem('uid')
+            });
             this.getMovies(accessToken);
         }else{
-            this.props.setUser(null);
+            this.setState({
+                user: null,
+                userID: null
+            });
         }
     }
 
     /* when a user successfully logs in, this function updates the 'user' property in state to that *particular* user */
     onLoggedIn(authData){
         //console.log(authData);
+        this.setState({
+            user: authData.user.username,
+            userID: authData.user._id
+        });
+
         localStorage.setItem('token', authData.token);
         localStorage.setItem('user', authData.user.username);
         localStorage.setItem('uid', authData.user._id);
-        this.props.setUser(authData.user.username);
         this.getMovies(authData.token)
     }
 
@@ -61,14 +65,14 @@ class MainView extends React.Component{
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('uid');
-        this.props.setUser(null);
+        this.setState({
+            user: null
+        });
     }
 
     render(){
-
-        //#5 movies is extractd from this.props rather than from the this.state
-        let { movies, user } = this.props;
-            
+        const {movies, user, userID} = this.state;   
+        
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
@@ -82,29 +86,28 @@ class MainView extends React.Component{
 
                         <Route path="/users/:username" render = {({ match, history }) => {
                             if(!user) return <Redirect to="/" />
-                            return <UserView onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} />
+                            return <UserView onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} /> 
 
                         <Route path="/directors/:director" render = {({ match, history }) => {
                             if(!user) return <Redirect to="/" />
-                            return <DirectorView movieData={movies.find(movie => movie.director.name === match.params.director)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} />
+                            return <DirectorView movieData={movies.find(movie => movie.director.name === match.params.director)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} /> 
 
                         <Route path="/genre/:genre" render = {({ match, history }) => {
                             if(!user) return <Redirect to="/" />
-                            return <GenreView movieData={movies.find(movie => movie.genre.name === match.params.genre)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} />
+                            return <GenreView movieData={movies.find(movie => movie.genre.name === match.params.genre)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} /> 
 
                         <Route path="/movies/:title" render = {({ match, history }) => {
                             if(!user) return <Redirect to="/" />
-                            return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} />
+                            return <MovieView movieData={movies.find(movie => movie.title === match.params.title)} onBackClick={() => history.goBack()} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} /> 
 
                         <Route path="/movies" render ={() => {
                             if(!user) return <Redirect to="/" />
                             if (movies.length === 0) return <Col md={8}><p>No Movies Found!</p></Col>
-                            //return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} />
-                            return <MoviesList movieData={movies} onLoggedOut={this.onLoggedOut} user={user} />
+                            return <MovieCard movieData={movies} onLoggedOut={this.onLoggedOut} user={user} userID={userID} />
                         }} />
 
                         <Route exact path="/" render = {() => {
@@ -114,9 +117,9 @@ class MainView extends React.Component{
                     </Switch>
                 </Row>
                 
-            </Router>            
+            </Router>
         );  
-    }  
+    }
     
     getMovies(token){
 
@@ -139,13 +142,9 @@ class MainView extends React.Component{
             //console.log(response.data);
             //console.log(movieData); //after modified image path
             
-            //replaced by redux set Movies
-            /*this.setState({
+            this.setState({
                 movies: response.data
-            });*/
-
-            // #4
-            this.props.setMovies(response.data);
+            });
         })
         .catch(error => {
             console.log(error);
@@ -154,14 +153,3 @@ class MainView extends React.Component{
     }
 
 }
-
-// #7 
-let mapStatetoProps = state => {
-    return {
-        movies : state.movies,
-        user : state.user,
-        userdata :  state.userdata
-    }
-}
-
-export default connect(mapStatetoProps, { setMovies, setUser, setUserData })(MainView);

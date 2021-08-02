@@ -31,7 +31,8 @@ export function LoginView(props){
                 const data = response.data;
                 props.onLoggedIn(data);  
             }).catch (e => {
-                setErrMsg(e.response.data.message.message);
+               if(e.response.data.message)
+               setErrMsg(e.response.data.message.message);
                 //console.log('no such user');
             });
         }
