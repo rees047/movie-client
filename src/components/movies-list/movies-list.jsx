@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import visibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
+import VisibilityFilterInput from '../visibility-filter-input/visibility-filter-input';
 import { MovieCard } from '../movie-card/movie-card';
 import { NavBarView } from '../navbar-view/navbar-view';
 
@@ -16,11 +16,10 @@ const mapStatetoProps = state => {
 function MoviesList(props){
    
     const { movieData, visibilityFilter, onLoggedOut, user, userID } = props;
-    let filteredMovies = movieData;
-   
+    let filteredMovies = movieData;   
 
     if (visibilityFilter !== ''){
-        filterMovies = movieData.filter(m => m.title.tolowercase().includes(visibilityFilter.tolowercase()));
+        filteredMovies = movieData.filter(m => String(m.title).toLowerCase().includes(visibilityFilter));
     }
 
     if (!movieData) return <div className = "main-view"></div>;
@@ -30,6 +29,7 @@ function MoviesList(props){
 
         <Col id="movieCard">
             <NavBarView onLoggedOut={onLoggedOut} user={user} />
+            <VisibilityFilterInput visibilityFilter={visibilityFilter} />
             <Row>
                { filteredMovies.map(m => (
                     <Col lg={3} className="d-flex align-items-normal" key={movieData._id}>
