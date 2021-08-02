@@ -40,11 +40,11 @@ export class DirectorView extends React.Component{
     }    
 
     render(){
-        const {movieData, onBackClick, onLoggedOut, user, userID } = this.props;        
+        const {movieData, onBackClick, onLoggedOut, user } = this.props;        
        
         return (
             <Col id="directorView">
-                <NavBarView onLoggedOut={onLoggedOut} user={user} userID={userID} />
+                <NavBarView onLoggedOut={onLoggedOut} user={user} />
                 <br/>
                 <Container id="director-info">
                     <Row>

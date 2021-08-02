@@ -47,6 +47,7 @@ export function RegisterView(props){
                 //window.open('/', '_self'); //the second argument '_self' is necessary so that the page will open in the current tab
             }).catch (e => {
                 //console.log(e.response.data.errors);
+                if(e.response.data.serverResponse)
                 setMsgObjArray(e.response.data.serverResponse);
                 //console.log('error registering the user');
             });

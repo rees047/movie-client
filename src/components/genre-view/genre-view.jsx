@@ -15,11 +15,11 @@ import  './genre-view.scss';
 export class GenreView extends React.Component{
 
     render(){
-        const {movieData, onBackClick, onLoggedOut, user, userID } = this.props;        
+        const {movieData, onBackClick, onLoggedOut, user } = this.props;        
        
         return (
             <Col id="genreView">
-                <NavBarView onLoggedOut={onLoggedOut} user={user} userID={userID} />
+                <NavBarView onLoggedOut={onLoggedOut} user={user} />
                 <br/>
                 <Container id="director-info">
                     <Row>
