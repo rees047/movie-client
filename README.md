@@ -6,7 +6,9 @@ MOVIE-API CLIENT using React Library
 Registered users will have to login to able to see the movie database.
 Unregistered users will have to make an account to be granted access.
 
-The endpoints are tested using postman to make sure they are working
+Routing is also implemented to match the API endpoints and retrieve corresponding data as requested.
+
+APP is being hosted using netlify
 
 Endpoints are:  
 [post]    register:               /register  
