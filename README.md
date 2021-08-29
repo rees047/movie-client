@@ -9,15 +9,15 @@ Unregistered users will have to make an account to be granted access.
 The endpoints are tested using postman to make sure they are working
 
 Endpoints are:
-[post]    register:               /register
-[get]     get all movies:         /movies
-[get]     get single movie:       /movies/:movie
-[get]     get genre:              /movies/genre/:genrename
-[get]     get director:           /director/:director
-[get]     get username:           /users/:username
-[post]    add favorite movie:     /users/:username/movies/:movietitle
-[delete]  delete favorite movie:  /users/:username/movies/:movietitle
-[delete]  delete user profile:    /users/:username
+[post]    register:               /register  
+[get]     get all movies:         /movies  
+[get]     get single movie:       /movies/:movie  
+[get]     get genre:              /movies/genre/:genrename  
+[get]     get director:           /director/:director  
+[get]     get username:           /users/:username  
+[post]    add favorite movie:     /users/:username/movies/:movietitle  
+[delete]  delete favorite movie:  /users/:username/movies/:movietitle  
+[delete]  delete user profile:    /users/:username  
 
 **OJECTIVE:** To show the capability of React Library
 
@@ -36,8 +36,8 @@ Endpoints are:
   "redux-devtools-extension": "^2.13.9"  
 },
 "devDependencies": {
-  "@parcel/transformer-image": "^2.0.0-nightly.2400",
-  "@parcel/transformer-sass": "^2.0.0-nightly.778",
+  "@parcel/transformer-image": "^2.0.0-nightly.2400",  
+  "@parcel/transformer-sass": "^2.0.0-nightly.778",  
   "parcel": "^2.0.0-nightly.776"
 }
 
