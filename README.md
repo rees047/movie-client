@@ -1,5 +1,5 @@
 # MOVIE-API CLIENT
-MOVIE-API CLIENT
+MOVIE-API CLIENT using React Library
 
 **DESCRIPTION:** This project is made as the face or client view of the movie-api app
 
@@ -24,7 +24,7 @@ Endpoints are:
 **LIVE DEMO:**: https://cinefiles.netlify.app/
 
 **TECHNOLOGIES**:
-dependencies: {
+"dependencies": {
   "axios": "^0.21.1",
   "prop-types": "^15.7.2",
   "react": "^17.0.2",
@@ -35,7 +35,7 @@ dependencies: {
   "redux": "^4.1.0",
   "redux-devtools-extension": "^2.13.9"
 },
-devDependencies: {
+"devDependencies": {
   "@parcel/transformer-image": "^2.0.0-nightly.2400",
   "@parcel/transformer-sass": "^2.0.0-nightly.778",
   "parcel": "^2.0.0-nightly.776"
