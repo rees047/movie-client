@@ -8,7 +8,7 @@ Unregistered users will have to make an account to be granted access.
 
 The endpoints are tested using postman to make sure they are working
 
-Endpoints are:
+Endpoints are:  
 [post]    register:               /register  
 [get]     get all movies:         /movies  
 [get]     get single movie:       /movies/:movie  
@@ -34,11 +34,11 @@ Endpoints are:
   "react-router-dom": "^5.2.0",  
   "redux": "^4.1.0",  
   "redux-devtools-extension": "^2.13.9"  
-},
-"devDependencies": {
-  "@parcel/transformer-image": "^2.0.0-nightly.2400",  
-  "@parcel/transformer-sass": "^2.0.0-nightly.778",  
-  "parcel": "^2.0.0-nightly.776"
+},  
+"devDependencies": {  
+  "@parcel/transformer-image": "^2.0.0-nightly.2400",    
+  "@parcel/transformer-sass": "^2.0.0-nightly.778",    
+  "parcel": "^2.0.0-nightly.776"  
 }
 
 importing images:
