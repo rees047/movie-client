@@ -1,7 +1,7 @@
-MOVIE-API
+# MOVIE-API CLIENT
+MOVIE-API CLIENT
 
-This project is made as the face or client view of the movie-api app
-This will be made using react library.
+**DESCRIPTION:** This project is made as the face or client view of the movie-api app
 
 Registered users will have to login to able to see the movie database.
 Unregistered users will have to make an account to be granted access.
@@ -19,8 +19,11 @@ Endpoints are:
 [delete]  delete favorite movie:  /users/:username/movies/:movietitle
 [delete]  delete user profile:    /users/:username
 
-Live Demo: https://cinefiles.netlify.app/
+**OJECTIVE:** To show the capability of React Library
 
+**LIVE DEMO:**: https://cinefiles.netlify.app/
+
+**TECHNOLOGIES**:
 dependencies: {
   "axios": "^0.21.1",
   "prop-types": "^15.7.2",
