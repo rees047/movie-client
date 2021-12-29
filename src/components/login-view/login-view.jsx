@@ -64,11 +64,11 @@ export function LoginView(props){
                                 <Col>
                                     <Form>
                                         <Form.Group controlId = "formGroupUsername">
-                                            <Form.Label>Username:</Form.Label>
+                                            <Form.Label>Username: <small>test34</small></Form.Label>
                                             <Form.Control type="text" value={username} name="username" required placeholder="enter username" minLength="5" maxLength="20" onChange={e => setUsername(e.target.value)} />
                                         </Form.Group>
                                         <Form.Group controlId = "formGroupPassword">
-                                            <Form.Label>Password:</Form.Label>
+                                            <Form.Label>Password: <small>test34</small></Form.Label>
                                             <Form.Control type="password" value={password} name="password" required placeholder="enter password" minLength="5" maxLength="20" onChange={e => setPassword(e.target.value)} />
                                         </Form.Group>
                                     </Form>
